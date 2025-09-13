@@ -33,3 +33,7 @@ React: De cero a experto - Edición 2025
 - [Documentación oficial de React](https://react.dev/learn)
 - [Gist curso de React](https://gist.github.com/Klerith/babd55ca1526ac882882888f75de208f)
 - [React - guía de atajos](https://github.com/Klerith/mas-talento/blob/main/react/react-cheatsheet.pdf)
+
+## Secciones
+
+- [Sección 3: Reforzamiento Javascript / TypeScript](./seccion_03/index.md)

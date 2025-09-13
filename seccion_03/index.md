@@ -29,3 +29,12 @@ npm run dev
   dependencias.
 - tsconfig.json : Archivo de configuración para indicar como queremos que
   TypeScript trabaje en nuestro proyecto.
+
+### Convenciones usadas
+
+- Código limpio
+  - Facil de leer y entender.
+  - Variables en inglés.
+- Usar camelCase para variables (ej: firstName)
+- Usar variables preferiblemente como const.
+- Solo usar let cuando se tenga claridad que el valor va a cambiar.
