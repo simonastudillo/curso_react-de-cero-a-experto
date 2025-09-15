@@ -5,7 +5,7 @@ export interface Hero {
 }
 
 // type Owner = 'DC' | 'Marvel';
-enum Owner {
+export enum Owner {
    DC = 'DC',
    Marvel = 'Marvel'
 }
