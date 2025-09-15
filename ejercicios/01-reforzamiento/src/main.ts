@@ -1,5 +1,5 @@
 import './style.css';
-import './bases/08-tarea';
+import './bases/08-imp-exp';
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
    <div>
