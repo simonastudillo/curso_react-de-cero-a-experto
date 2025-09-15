@@ -1,5 +1,5 @@
 import './style.css';
-import './bases/08-imp-exp';
+import './bases/09-promises';
 // import { getHeroesByOwner } from './bases/08-imp-exp';
 // import { Owner } from './data/heroes.data';
 
