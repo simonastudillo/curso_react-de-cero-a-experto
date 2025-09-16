@@ -5,12 +5,17 @@ interface Props {
    quantity?: number;
 }
 
-export const ItemCounter = ({ itemName, quantity }: Props) => {
+export const ItemCounter = ({ itemName, quantity = 1 }: Props) => {
 
-   // const [counter, setCounter] = useState(quantity);
+   const [count, setCounter] = useState(quantity);
 
-   const handleClick = () => {
-      console.log(`Click en ${itemName}`);
+   const handleAdd = () => {
+      setCounter(count + 1);
+   }
+
+   const handleSubtract = () => {
+      if (count === 1) return;
+      setCounter(count - 1);
    }
 
    return (
@@ -24,10 +29,12 @@ export const ItemCounter = ({ itemName, quantity }: Props) => {
             width: 150
          }}>{itemName}</span>
          <button
-            onClick={handleClick}
+            onClick={handleAdd}
          >+1</button>
-         <span>{quantity ?? 1}</span>
-         <button>-1</button>
+         <span>{count ?? 1}</span>
+         <button
+            onClick={handleSubtract}
+         >-1</button>
       </section>
    )
 }
