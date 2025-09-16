@@ -37,3 +37,4 @@ Temas a tratar en la sección:
 
 - Usar App en el nombre del archivo de entrada para la aplicación, ejemplo:
   FirstStepsApp.tsx
+- Los componentes deben nombrarse en estilo UpperCamelCase.
