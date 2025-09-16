@@ -32,3 +32,8 @@ Temas a tratar en la sección:
 - node_modules/ : Modulos de dependencias y sus dependencias.
 - public/ : Recursos estáticos como imagenes, fuentes, css, etc.
 - src/ : Estructura de directorios flexible donde está el proyecto de React.
+
+### Nomenclaturas
+
+- Usar App en el nombre del archivo de entrada para la aplicación, ejemplo:
+  FirstStepsApp.tsx
