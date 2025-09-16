@@ -37,3 +37,4 @@ React: De cero a experto - Edición 2025
 ## Secciones
 
 - [Sección 3: Reforzamiento Javascript / TypeScript](./seccion_03/index.md)
+- [Sección 4: Primeros pasos en React](./seccion_04/index.md)
