@@ -29,3 +29,6 @@ Temas a tratar en la sección:
 - eslint.config.ts: Configuración de como queremos que se codifique, a nivel de
   QA.
 - .gitignore: Archivos a ignorar en los repositorios de git.
+- node_modules/ : Modulos de dependencias y sus dependencias.
+- public/ : Recursos estáticos como imagenes, fuentes, css, etc.
+- src/ : Estructura de directorios flexible donde está el proyecto de React.
