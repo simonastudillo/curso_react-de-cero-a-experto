@@ -108,3 +108,10 @@ npm install -D vitest
    "coverage": "vitest run --coverage"
 }
 ```
+
+Se recomienda crear las pruebas al mismo nivel archivo a probar añadiendo la extensión `test`, por ejemplo:
+```
+helper
+├── math.helper.test.ts    # Archivo de pruebas (Test Suite) del helper math
+└── math.helper.ts         # Archivo de TypeScript 
+```
