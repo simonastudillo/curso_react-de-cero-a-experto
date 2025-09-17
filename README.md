@@ -10,6 +10,17 @@ React: De cero a experto - Edición 2025
 - HTML
 - CSS
 
+## Herramientas a enseñar
+
+- Visual studio code
+- Node.js
+- Postman
+- Warp
+- Docker Desktop
+- TypeScript
+- ViTest
+- Testing Library
+
 ## Instalaciones recomendadas
 
 - Visual studio code.
