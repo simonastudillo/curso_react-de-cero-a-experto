@@ -88,3 +88,23 @@ Assert (afirmar):
 - Cobertura de ramas: Porcentaje de ramas de decisión probadas.
 - Cobertura de funciones: Porcentaje de funciones/métodos invocados.
 - Cobertura de condiciones: Porcentaje de condiciones evaluadas en ambos sentidos.
+
+
+## Configuración de Vitest
+
+No es necesario que el servidor local o la aplicación esté arriba. Se utiliza Vitest porque ya estamos trabajando en el ecosistema de Vite, haciendo más fácil la integración.
+
+- Documentación oficial: [https://vitest.dev](https://vitest.dev).
+- Ingresamos al directorio del proyecto. 
+- Instalamos vitest
+```console
+npm install -D vitest
+```
+- Agrega los scripts de testing al package.json, sección scripts
+```json
+"scripts": {
+   "test": "vitest",
+   "test:ui": "vitest --ui",
+   "coverage": "vitest run --coverage"
+}
+```
