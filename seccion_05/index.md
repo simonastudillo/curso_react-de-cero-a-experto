@@ -115,3 +115,37 @@ helper
 ├── math.helper.test.ts    # Archivo de pruebas (Test Suite) del helper math
 └── math.helper.ts         # Archivo de TypeScript 
 ```
+
+## Configuración de Testing Library
+
+Lo usamos para usar evaluciones con los componentes de React renderizado.
+
+- Documentación oficial [https://testing-library.com](https://testing-library.com/docs/react-testing-library/intro)
+- Instalamos Testing Library
+```console
+npm install --save-dev @testing-library/react @testing-library/dom @types/react @types/react-dom
+```
+- Modificamos el archivo de `vite.config.ts`
+```
+# Antes
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react-swc'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+   plugins: [react()],
+})
+
+# Ahora
+import { defineConfig } from 'vitest/config'
+import react from '@vitejs/plugin-react-swc'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+   plugins: [react()],
+   test: {
+      environment: 'jsdom',
+      globals: true
+   }
+})
+``` 
