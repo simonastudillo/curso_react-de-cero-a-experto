@@ -156,3 +156,4 @@ export default defineConfig({
 - `expect().toContain()` espera que el la variable del expect contenga el valor de toContain.
 - `render` solo muestra el componente como fue renderizado la primera vez, no se actualiza el estado.
 - `screen` muestra el componente renderizado y actualizado con los cambios de estado.
+- `snapshot` es para comprobar que la estructura fisica de un componente no se ha modificado con el tiempo.

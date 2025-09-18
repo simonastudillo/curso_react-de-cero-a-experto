@@ -31,4 +31,20 @@ describe('MyAwesomeApp', () => {
       expect(h3?.innerHTML).toContain(expectLastName);
    })
 
+   test('should match snapshot', () => {
+      // Arrange
+      const { container } = render(<MyAwesomeApp />);
+      // Assert
+      expect(container).toMatchSnapshot();
+   })
+
+   test('should match snapshot - screen', () => {
+      // Arrange
+      render(<MyAwesomeApp />);
+      // Act
+      const div = screen.getByTestId('div-app');
+      // Assert
+      expect(div).toMatchSnapshot();
+   })
+
 });
