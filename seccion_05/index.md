@@ -149,3 +149,10 @@ export default defineConfig({
    }
 })
 ``` 
+
+## Notas
+
+- `expect().toBe()` espera que los valores sean iguales.
+- `expect().toContain()` espera que el la variable del expect contenga el valor de toContain.
+- `render` solo muestra el componente como fue renderizado la primera vez, no se actualiza el estado.
+- `screen` muestra el componente renderizado y actualizado con los cambios de estado.
