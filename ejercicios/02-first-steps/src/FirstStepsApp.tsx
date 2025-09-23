@@ -1,6 +1,6 @@
 import { ItemCounter } from "./shopping-cart/ItemCounter";
 
-interface ItemInCart {
+export interface ItemInCart {
    productName: string;
    quantity: number;
 }

@@ -2,7 +2,7 @@ import { useState } from "react";
 // import './ItemCounter.css';
 import styles from './ItemCounter.module.css';
 
-interface Props {
+export interface Props {
    itemName: string;
    quantity?: number;
 }
