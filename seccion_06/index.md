@@ -10,3 +10,5 @@ En esta sección se verán los siguientes temas:
 - useEffect
 - Variables de entorno
 - Fuentes personalizadas.
+
+El proyecto de esta sección se encuentra [aqui](../ejercicios/03-gifs-app/)
