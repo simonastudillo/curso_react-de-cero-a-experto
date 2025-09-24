@@ -20,6 +20,7 @@ React: De cero a experto - Edición 2025
 - TypeScript
 - ViTest
 - Testing Library
+- Axios
 
 ## Instalaciones recomendadas
 
