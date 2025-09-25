@@ -9,9 +9,9 @@ export const GifsApp = () => {
       <>
          <CustomHeader title="Buscador de Gifs" description="Descrubre y comparte el gif perfecto" />
          <CustomSearchBar placeholder="Busca lo que quieras" />
-         <PreviousSearches />
+         <PreviousSearches searches={['Gokú', 'Dragon ball z']} />
 
-         <GifList gifs={mockGifs} />
+         < GifList gifs={mockGifs} />
       </>
    )
 }
