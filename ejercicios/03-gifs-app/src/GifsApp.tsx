@@ -13,10 +13,17 @@ export const GifsApp = () => {
       console.log(term);
    }
 
+   const handleSearch = (query: string) => {
+      console.log(query);
+   }
+
    return (
       <>
          <CustomHeader title="Buscador de Gifs" description="Descrubre y comparte el gif perfecto" />
-         <CustomSearchBar placeholder="Busca lo que quieras" />
+         <CustomSearchBar
+            placeholder="Busca lo que quieras"
+            onQuery={handleSearch}
+         />
          <PreviousSearches
             searches={previousTerms}
             onLabelClicked={handleTermClick}
