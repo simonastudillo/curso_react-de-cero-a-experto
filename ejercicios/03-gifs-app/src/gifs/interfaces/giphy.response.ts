@@ -1,5 +1,5 @@
 export interface GiphyResponse {
-   data: GiphyGif;
+   data: GiphyGif[];
    meta: Meta;
 }
 
