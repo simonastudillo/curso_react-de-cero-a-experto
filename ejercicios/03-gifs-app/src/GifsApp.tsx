@@ -1,41 +1,40 @@
+import { useState } from "react"
+import { GifList } from "./gifs/components/GifList"
+import { PreviousSearches } from "./gifs/components/PreviousSearches"
 import { mockGifs } from "./mock-data/gifs.mock"
+import { CustomHeader } from "./shared/components/CustomHeader"
+import { CustomSearchBar } from "./shared/components/CustomSearchBar"
 
 export const GifsApp = () => {
+
+   const [previousTerms, setPreviousTerms] = useState(['Gokú']);
+
+   const handleTermClick = (term: string) => {
+      console.log(term);
+   }
+
+   const handleSearch = (query: string = '') => {
+      const cleanQuery = query.trim().toLowerCase();
+      if (cleanQuery.length === 0) return;
+
+      if (previousTerms.includes(cleanQuery)) return;
+
+      setPreviousTerms([cleanQuery, ...previousTerms].slice(0, 8));
+   }
+
    return (
       <>
-         {/* Header */}
-         <div className="content-center">
-            <h1>Buscador de Gifs</h1>
-            <p>Descubre y comparte el gif perfecto</p>
-         </div>
-         {/* Search */}
-         <div className="search-container">
-            <input type="text" placeholder="Buscar gifs" />
-            <button>Buscar</button>
-         </div>
-         {/* Busquedas previas */}
-         <div className="previous-searches">
-            <h2>Búsquedas previas</h2>
-            <ul className="previous-searches-list">
-               <li>Gokú</li>
-               <li>Luffy</li>
-               <li>Zoro</li>
-            </ul>
-         </div>
-         {/* Gifs */}
-         <div className="gifs-container">
-            {
-               mockGifs.map((gif) => (
-                  <div key={gif.id} className="gif-card">
-                     <img src={gif.url} alt={gif.title} />
-                     <h3>{gif.title}</h3>
-                     <p>
-                        {gif.width}x{gif.height} (1.5mb)
-                     </p>
-                  </div>
-               ))
-            }
-         </div>
+         <CustomHeader title="Buscador de Gifs" description="Descrubre y comparte el gif perfecto" />
+         <CustomSearchBar
+            placeholder="Busca lo que quieras"
+            onQuery={handleSearch}
+         />
+         <PreviousSearches
+            searches={previousTerms}
+            onLabelClicked={handleTermClick}
+         />
+
+         < GifList gifs={mockGifs} />
       </>
    )
 }
