@@ -52,3 +52,4 @@ React: De cero a experto - Edición 2025
 - [Sección 4: Primeros pasos en React](./seccion_04/index.md)
 - [Sección 5: Pruebas automáticas - Unit testing](./seccion_05/index.md)
 - [Sección 6: GiftExpertApp - Aplicación](./seccion_06/index.md)
+- [Sección 7: Opimización y despliegue](./seccion_07/index.md)
