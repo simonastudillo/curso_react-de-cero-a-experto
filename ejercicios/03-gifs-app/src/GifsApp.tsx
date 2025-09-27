@@ -1,14 +1,17 @@
 import { useState } from "react"
 import { GifList } from "./gifs/components/GifList"
 import { PreviousSearches } from "./gifs/components/PreviousSearches"
-import { mockGifs } from "./mock-data/gifs.mock"
 import { CustomHeader } from "./shared/components/CustomHeader"
 import { CustomSearchBar } from "./shared/components/CustomSearchBar"
 import { GetGifsByQuery } from "./gifs/actions/get-gifs-by-query.action"
+import type { Gif } from "./gifs/interfaces/gif.interface"
+
+const initialGifs: Gif[] = [];
 
 export const GifsApp = () => {
 
    const [previousTerms, setPreviousTerms] = useState(['Gokú']);
+   const [gifs, setGifs] = useState(initialGifs);
 
    const handleTermClick = (term: string) => {
       console.log(term);
@@ -23,6 +26,7 @@ export const GifsApp = () => {
       setPreviousTerms([cleanQuery, ...previousTerms].slice(0, 8));
 
       const gifs = await GetGifsByQuery(cleanQuery);
+      setGifs(gifs);
    }
 
    return (
@@ -37,7 +41,7 @@ export const GifsApp = () => {
             onLabelClicked={handleTermClick}
          />
 
-         < GifList gifs={mockGifs} />
+         < GifList gifs={gifs} />
       </>
    )
 }
