@@ -6,12 +6,10 @@ import { CustomSearchBar } from "./shared/components/CustomSearchBar"
 import { GetGifsByQuery } from "./gifs/actions/get-gifs-by-query.action"
 import type { Gif } from "./gifs/interfaces/gif.interface"
 
-const initialGifs: Gif[] = [];
-
 export const GifsApp = () => {
 
-   const [previousTerms, setPreviousTerms] = useState(['Gokú']);
-   const [gifs, setGifs] = useState(initialGifs);
+   const [previousTerms, setPreviousTerms] = useState<string[]>([]);
+   const [gifs, setGifs] = useState<Gif[]>([]);
 
    const handleTermClick = (term: string) => {
       console.log(term);
