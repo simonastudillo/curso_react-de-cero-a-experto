@@ -13,8 +13,13 @@ export const GifsApp = () => {
       console.log(term);
    }
 
-   const handleSearch = (query: string) => {
-      console.log(query);
+   const handleSearch = (query: string = '') => {
+      const cleanQuery = query.trim().toLowerCase();
+      if (cleanQuery.length === 0) return;
+
+      if (previousTerms.includes(cleanQuery)) return;
+
+      setPreviousTerms([cleanQuery, ...previousTerms].slice(0, 8));
    }
 
    return (
