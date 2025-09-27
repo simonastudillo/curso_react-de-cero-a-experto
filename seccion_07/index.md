@@ -9,3 +9,10 @@ A partir de aqui se usará mucho custom hooks, para extraer la funcionalidad y r
 - useRef - Hook propio de React.
 - Generar versión de producción.
 - Separación de responsabilidades.
+
+
+## Custom hooks
+
+Como estandar:
+- Deja los custom hooks en una carpeta llamada hooks.
+- Nombre tus custom hooks con la palabra `use`.
