@@ -21,6 +21,7 @@ React: De cero a experto - Edición 2025
 - ViTest
 - Testing Library
 - Axios
+- jsdom
 
 ## Instalaciones recomendadas
 
