@@ -51,12 +51,18 @@ describe('useCounter', () => {
 
    test('Should reset counter when handleReset is called', () => {
       // Arrange
+      const valueExpectedOnSubtract = 9;
       const valueExpected = 10;
       const { result } = renderHook(() => useCounter());
+
       // Act
       act(() => {
          result.current.handleSubtract();
       });
+      // Assert
+      expect(result.current.counter).toBe(valueExpectedOnSubtract);
+
+      // Act
       act(() => {
          result.current.handleReset();
       });
