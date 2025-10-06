@@ -10,7 +10,7 @@ export const MyCounterApp = () => {
          flexDirection: 'column',
          alignItems: 'center'
       }}>
-         <h1>{counter}</h1>
+         <h1>counter: {counter}</h1>
          <div style={{
             display: 'flex',
             gap: 10
