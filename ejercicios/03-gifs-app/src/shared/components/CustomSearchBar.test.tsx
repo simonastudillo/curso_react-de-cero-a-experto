@@ -18,7 +18,7 @@ describe('CustomSearchBar', () => {
    test('Should call onQuery with the current value after 700ms', async () => {
       const onQuery = vi.fn();
       const inputValue = 'test';
-      const { container } = render(<CustomSearchBar onQuery={onQuery} />);
+      const { } = render(<CustomSearchBar onQuery={onQuery} />);
 
       const input = screen.getByRole('textbox');
       fireEvent.change(input, { target: { value: `${inputValue}` } });
@@ -28,6 +28,47 @@ describe('CustomSearchBar', () => {
          expect(onQuery).toHaveBeenCalled();
          expect(onQuery).toHaveBeenCalledWith(inputValue);
       });
+   });
+
+   test('Should call onQuery only once with the last value (debounce', async () => {
+      const onQuery = vi.fn();
+      const inputValue = 'malo';
+      const { } = render(<CustomSearchBar onQuery={onQuery} />);
+
+      const input = screen.getByRole('textbox');
+      for (let i = 0; i < inputValue.length; i++) {
+         fireEvent.change(input, { target: { value: `${inputValue.substring(0, i + 1)}` } });
+      }
+
+      // await new Promise(resolve => setTimeout(resolve, 701));
+      await waitFor(() => {
+         expect(onQuery).toHaveBeenCalled();
+         expect(onQuery).toHaveBeenCalledTimes(1);
+         expect(onQuery).toHaveBeenCalledWith(inputValue);
+      });
+   });
+
+   test('Should call onQuery when button clicked with the input value', () => {
+      const onQuery = vi.fn();
+      const inputValue = 'malo';
+      const { } = render(<CustomSearchBar onQuery={onQuery} />);
+
+      const input = screen.getByRole('textbox');
+      fireEvent.change(input, { target: { value: `${inputValue}` } });
+      const button = screen.getByRole('button');
+      fireEvent.click(button);
+
+      expect(onQuery).toHaveBeenCalledTimes(1);
+      expect(onQuery).toHaveBeenCalledWith(inputValue);
+   });
+
+   test('Should the input has the correct placeholder value', () => {
+      const placeholder = 'Buscar...';
+      const { container } = render(<CustomSearchBar onQuery={() => { }} placeholder={placeholder} />);
+
+      const renderPlaceholder = screen.getByPlaceholderText(placeholder);
+
+      expect(renderPlaceholder).toBeDefined();
    });
 
 });
