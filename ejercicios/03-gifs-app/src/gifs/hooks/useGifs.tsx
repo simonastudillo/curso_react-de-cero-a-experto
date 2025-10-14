@@ -8,13 +8,13 @@ export const useGifs = () => {
    const [previousTerms, setPreviousTerms] = useState<string[]>([]);
    const [gifs, setGifs] = useState<Gif[]>([]);
 
-   const handleTermClick = (term: string) => {
-      handleSearch(term);
+   const handleTermClick = async (term: string) => {
+      await handleSearch(term);
    }
 
    const gifsCache = useRef<Record<string, Gif[]>>({});
 
-   const handleSearch = (query: string = '') => {
+   const handleSearch = async (query: string = '') => {
       const cleanQuery = query.trim().toLowerCase();
       if (cleanQuery.length === 0) return;
 
@@ -30,7 +30,7 @@ export const useGifs = () => {
          setPreviousTerms([cleanQuery, ...previousTerms].slice(0, 8));
       }
 
-      handleFetch(cleanQuery);
+      await handleFetch(cleanQuery);
 
    }
 
