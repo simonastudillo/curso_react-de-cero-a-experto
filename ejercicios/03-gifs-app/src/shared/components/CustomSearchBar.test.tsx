@@ -64,7 +64,7 @@ describe('CustomSearchBar', () => {
 
    test('Should the input has the correct placeholder value', () => {
       const placeholder = 'Buscar...';
-      const { container } = render(<CustomSearchBar onQuery={() => { }} placeholder={placeholder} />);
+      const { } = render(<CustomSearchBar onQuery={() => { }} placeholder={placeholder} />);
 
       const renderPlaceholder = screen.getByPlaceholderText(placeholder);
 
