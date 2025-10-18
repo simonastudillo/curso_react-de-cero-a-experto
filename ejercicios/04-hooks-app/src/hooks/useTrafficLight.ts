@@ -14,10 +14,6 @@ export const useTrafficLight = () => {
    const [light, setLight] = useState<TrafficLightColor>('red');
    const [countdown, setCountdown] = useState<number>(5);
 
-   const redClass = (light === 'red') ? colors.red : colors.gray;
-   const yelllowClass = (light === 'yellow') ? colors.yellow : colors.gray;
-   const greenClass = (light === 'green') ? colors.green : colors.gray;
-
    useEffect(() => {
       if (countdown === 0) return;
 
@@ -51,10 +47,14 @@ export const useTrafficLight = () => {
 
 
    return {
+      // Props
       countdown,
-      redClass,
-      yelllowClass,
-      greenClass
+      // Computed
+      percetage: (countdown / 5) * 100,
+      redLightClass: (light === 'red') ? colors.red : colors.gray,
+      yelllowLightClass: (light === 'yellow') ? colors.yellow : colors.gray,
+      greenLightClass: (light === 'green') ? colors.green : colors.gray,
+      // Methods
    }
 
 };
