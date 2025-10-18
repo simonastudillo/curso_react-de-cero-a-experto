@@ -12,3 +12,11 @@ Se probarán todo lo nuevo, no se realizarán pruebas sobre lo ya probado en sec
 - Integrar testing en el proceso de construcción
 - Espías
 - Sobreescribir funciones para el testing
+
+## Instalación de Tailwind
+
+Ingresar a la página de [Tailwind](https://tailwindcss.com/docs/installation/using-vite) y seguir los pasos.
+
+```console
+pnpm install tailwindcss @tailwindcss/vite
+```

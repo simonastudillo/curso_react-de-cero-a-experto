@@ -22,6 +22,7 @@ React: De cero a experto - Edición 2025
 - Testing Library
 - Axios
 - jsdom
+- Tailwind
 
 ## Instalaciones recomendadas
 
