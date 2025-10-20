@@ -23,6 +23,7 @@ React: De cero a experto - Edición 2025
 - Axios
 - jsdom
 - Tailwind
+- Shadcn/ui
 
 ## Instalaciones recomendadas
 
