@@ -56,3 +56,5 @@ React: De cero a experto - Edición 2025
 - [Sección 6: GiftExpertApp - Aplicación](./seccion_06/index.md)
 - [Sección 7: Optimización y despliegue](./seccion_07/index.md)
 - [Sección 8: Testing - Pruebas sobre GifsApp](./seccion_08/index.md)
+- [Sección 9: Profundizando Hooks y React](./seccion_09/index.md)
+- [Sección 10: Profundizando Hooks - useReducer](./seccion_10/index.md)
