@@ -15,3 +15,9 @@ En aplicaciones React más complejas, el estado puede volverse difícil de manej
 - LocalStorage y SessionStorage
 - Condiciones de los reducers
 - Tareas y ejercicios adicionales
+
+## ¿Por qué instalar shadcn?
+
+- Shadcn nos ayuda crear componentes con variantes
+- Tiene dependencias de radix-ui (nos permite tener la funcionalidad de algo sin preocuparse del estilo)
+- Nos permite instalar/importar solo los componentes que necesitamos y no toda una librería pesada
