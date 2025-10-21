@@ -1,3 +1,5 @@
+import * as z from "zod";
+
 interface Todo {
    id: number;
    text: string;
@@ -5,16 +7,29 @@ interface Todo {
 }
 
 interface TasksState {
-   todos: Todo[],
-   length: number,
-   completed: number,
-   pending: number
+   todos: Todo[];
+   length: number;
+   completed: number;
+   pending: number;
 }
 
 type TaskAction =
    { type: 'ADD_TODO', payload: string }
    | { type: 'TOGGLE_TODO', payload: number }
    | { type: 'DELETE_TODO', payload: number }
+
+const todoSchema = z.object({
+   id: z.number(),
+   text: z.string(),
+   completed: z.boolean()
+});
+
+const taskStateSchema = z.object({
+   todos: z.array(todoSchema),
+   length: z.number(),
+   completed: z.number(),
+   pending: z.number(),
+});
 
 export const getTasksInitialState = (): TasksState => {
 
@@ -28,7 +43,18 @@ export const getTasksInitialState = (): TasksState => {
          pending: 0
       }
    }
-   return JSON.parse(localStorageState);
+   const result = taskStateSchema.safeParse(JSON.parse(localStorageState));
+
+   if (result.error) {
+      console.log(result.error);
+      return {
+         todos: [],
+         length: 0,
+         completed: 0,
+         pending: 0
+      }
+   }
+   return result.data;
 
 }
 
