@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { SkipForward, Play } from 'lucide-react';
+import confetti from 'canvas-confetti';
 
 const GAME_WORDS = [
    'REACT',
@@ -56,45 +57,48 @@ export const ScrambleWords = () => {
       // Previene el refresh de la página
       e.preventDefault();
       // Implementar lógica de juego
-      console.log('Intento de adivinanza:', guess, currentWord);
+      if (guess === currentWord) {
+         const newWords = words.slice(1);
 
-      if (guess !== currentWord) {
-         setErrorCounter((prev) => prev + 1);
-      }
-      setPoints(points + 1);
-      setGuess('');
-      const currentIndex = skipCounter + points;
-      if (words.length > currentIndex) {
-         // setWords(newWords);
-         setCurrentWord(words[currentIndex]);
-         setScrambledWord(scrambleWord(words[currentIndex]));
+         confetti({
+            particleCount: 100,
+            spread: 120,
+            origin: { y: 0.6 },
+         });
+
+         setPoints(points + 1);
+         setGuess('');
+         setWords(newWords);
+         setCurrentWord(newWords[0]);
+         setScrambledWord(scrambleWord(newWords[0]));
          return;
       }
-      setIsGameOver(true);
+
+      setErrorCounter(errorCounter + 1);
+      setGuess('');
+
+      if (errorCounter + 1 >= maxAllowErrors) {
+         setIsGameOver(true);
+      }
 
    };
 
    const handleSkip = () => {
-      console.log('Palabra saltada');
+      if (skipCounter >= maxSkips) return;
+      const newWords = words.slice(1);
       setSkipCounter(skipCounter + 1);
       setGuess('');
-      const currentIndex = skipCounter + points;
-      if (words.length > currentIndex) {
-         // setWords(words);
-         setCurrentWord(words[currentIndex]);
-         setScrambledWord(scrambleWord(words[currentIndex]));
-         return;
-      }
-      setIsGameOver(true);
+      setWords(newWords);
+      setCurrentWord(newWords[0]);
+      setScrambledWord(scrambleWord(newWords[0]));
    };
 
    const handlePlayAgain = () => {
-      setIsGameOver(false);
-      setMaxSkips(3);
-      setSkipCounter(0);
-      setErrorCounter(0);
       setPoints(0);
+      setErrorCounter(0);
       setGuess('');
+      setIsGameOver(false);
+      setSkipCounter(0);
       const newWords: string[] = shuffleArray(GAME_WORDS);
       setWords(newWords);
       setCurrentWord(newWords[0]);
