@@ -66,6 +66,8 @@ export const getScrambleWordsInitialState = (): ScrambleWordsState => {
 export type ScrambleWordsAction =
    { type: 'SET_GUESS', payload: string }
    | { type: 'CHECK_ANSWER' }
+   | { type: 'SKIP_WORD' }
+   | { type: 'START_NEW_GAME', payload: ScrambleWordsState }
 
 export const ScrambleWordsReducer = (state: ScrambleWordsState, { type, payload }: ScrambleWordsAction): ScrambleWordsState => {
 
@@ -75,7 +77,7 @@ export const ScrambleWordsReducer = (state: ScrambleWordsState, { type, payload 
             ...state,
             guess: payload.toUpperCase()
          }
-      case 'CHECK_ANSWER':
+      case 'CHECK_ANSWER': {
          if (state.guess === state.currentWord) {
             const newWords = state.words.slice(1);
             return {
@@ -94,6 +96,27 @@ export const ScrambleWordsReducer = (state: ScrambleWordsState, { type, payload 
             errorCounter: state.errorCounter + 1,
             isGameOver: (state.errorCounter + 1 >= state.maxAllowErrors)
          }
+      }
+      case 'SKIP_WORD': {
+         if (state.skipCounter >= state.maxSkips) {
+            return {
+               ...state
+            }
+         };
+         const newWords = state.words.slice(1);
+         return {
+            ...state,
+            skipCounter: state.skipCounter + 1,
+            guess: '',
+            words: newWords,
+            currentWord: newWords[0],
+            scrambledWord: scrambleWord(newWords[0])
+         }
+      }
+      case 'START_NEW_GAME': {
+         // return getScrambleWordsInitialState();
+         return payload
+      }
       default:
          return state
    }

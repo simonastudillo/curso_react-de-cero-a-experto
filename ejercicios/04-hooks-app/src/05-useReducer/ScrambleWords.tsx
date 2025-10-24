@@ -35,25 +35,17 @@ export const ScrambleWords = () => {
    };
 
    const handleSkip = () => {
-      // if (skipCounter >= maxSkips) return;
-      // const newWords = words.slice(1);
-      // setSkipCounter(skipCounter + 1);
-      // setGuess('');
-      // setWords(newWords);
-      // setCurrentWord(newWords[0]);
-      // setScrambledWord(scrambleWord(newWords[0]));
+
+      dispatch({
+         type: 'SKIP_WORD'
+      })
    };
 
    const handlePlayAgain = () => {
-      // setPoints(0);
-      // setErrorCounter(0);
-      // setGuess('');
-      // setIsGameOver(false);
-      // setSkipCounter(0);
-      // const newWords: string[] = shuffleArray(GAME_WORDS);
-      // setWords(newWords);
-      // setCurrentWord(newWords[0]);
-      // setScrambledWord(scrambleWord(words[0]));
+      dispatch({
+         type: 'START_NEW_GAME',
+         payload: getScrambleWordsInitialState()
+      })
    };
 
    //! Si ya no hay palabras para jugar, se muestra el mensaje de fin de juego
