@@ -27,33 +27,11 @@ export const ScrambleWords = () => {
 
 
    const handleGuessSubmit = (e: React.FormEvent) => {
-      // // Previene el refresh de la página
-      // e.preventDefault();
-      // // Implementar lógica de juego
-      // if (guess === currentWord) {
-      //    const newWords = words.slice(1);
-
-      //    confetti({
-      //       particleCount: 100,
-      //       spread: 120,
-      //       origin: { y: 0.6 },
-      //    });
-
-      //    setPoints(points + 1);
-      //    setGuess('');
-      //    setWords(newWords);
-      //    setCurrentWord(newWords[0]);
-      //    setScrambledWord(scrambleWord(newWords[0]));
-      //    return;
-      // }
-
-      // setErrorCounter(errorCounter + 1);
-      // setGuess('');
-
-      // if (errorCounter + 1 >= maxAllowErrors) {
-      //    setIsGameOver(true);
-      // }
-
+      // Previene el refresh de la página
+      e.preventDefault();
+      dispatch({
+         type: 'CHECK_ANSWER'
+      })
    };
 
    const handleSkip = () => {
@@ -156,9 +134,12 @@ export const ScrambleWords = () => {
                               id="guess"
                               type="text"
                               value={guess}
-                              // onChange={(e) =>
-                              //    setGuess(e.target.value.toUpperCase().trim())
-                              // }
+                              onChange={(e) =>
+                                 dispatch({
+                                    type: 'SET_GUESS',
+                                    payload: e.target.value,
+                                 })
+                              }
                               placeholder="Ingresa tu palabra..."
                               className="text-center text-lg font-semibold h-12 border-2 border-indigo-200 focus:border-indigo-500 transition-colors"
                               maxLength={scrambledWord.length}
