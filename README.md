@@ -24,6 +24,7 @@ React: De cero a experto - Edición 2025
 - jsdom
 - Tailwind
 - Shadcn/ui
+- zod (validador de esquemas)
 
 ## Instalaciones recomendadas
 
