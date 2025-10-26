@@ -60,3 +60,4 @@ React: De cero a experto - Edición 2025
 - [Sección 8: Testing - Pruebas sobre GifsApp](./seccion_08/index.md)
 - [Sección 9: Profundizando Hooks y React](./seccion_09/index.md)
 - [Sección 10: Profundizando Hooks - useReducer](./seccion_10/index.md)
+- [Sección 11: Memorización y optimizaciones](./seccion_11/index.md)
