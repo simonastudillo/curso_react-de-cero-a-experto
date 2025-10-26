@@ -2,16 +2,17 @@ import React from "react";
 
 interface MySubTitleProps {
    subTitle: string;
+   callMyAPI: (myValue: string) => void;
 }
 
-export const MySubTitle = React.memo(({ subTitle }: MySubTitleProps) => {
+export const MySubTitle = React.memo(({ subTitle, callMyAPI }: MySubTitleProps) => {
    console.log('MySubTitle re-render');
 
    console.log('Tarea muy pesada');
    return (
       <>
          <h6 className="text-2xl font-bold">{subTitle}</h6>
-         <button className="bg-indigo-500 text-white px-2 py-2 rounded-md cursor-pointer">
+         <button className="bg-indigo-500 text-white px-2 py-2 rounded-md cursor-pointer" onClick={() => callMyAPI(subTitle)}>
             Llamar a función
          </button>
       </>
