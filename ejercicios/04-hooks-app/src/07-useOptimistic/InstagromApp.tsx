@@ -1,4 +1,5 @@
 import { useOptimistic, useState, useTransition } from 'react';
+import { toast } from 'sonner'
 
 interface Comment {
    id: number;
@@ -33,13 +34,24 @@ export const InstagromApp = () => {
       startTransition(async () => {
          // Simular la petición HTTP al servidor
          await new Promise(resolve => setTimeout(resolve, 3e3));
-         console.log('Servidor respondió');
+         // console.log('Servidor respondió');
 
-         setComments([...comments, {
-            id: new Date().getTime(),
-            text: messageText
-         }])
+         // setComments([...comments, {
+         //    id: new Date().getTime(),
+         //    text: messageText
+         // }])
 
+         // Este es el código para revertir el proceso
+         setComments(prev => prev);
+         toast.error('Error al agregar el comentario', {
+            description: 'Intente nuevamente',
+            duration: 10e3,
+            position: 'top-right',
+            action: {
+               label: 'Cerrar',
+               onClick: () => toast.dismiss()
+            }
+         })
       });
    };
 
