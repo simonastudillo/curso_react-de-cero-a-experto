@@ -6,8 +6,9 @@ export interface User {
 }
 
 export const getUserAction = async (id: number) => {
+   console.log('función llamada');
    await new Promise((res) => setTimeout(res, 2e3));
-
+   console.log('función resolvió');
    return {
       id,
       name: 'Simón Astudillo',
