@@ -7,3 +7,13 @@ Utilizaremos React Router en la forma de Data Router para evitar el drop drillin
 Realizaremos una aplicación con un login sencillo y páginas públicas y privadas, donde se validará el estado, si hay usuario activo o no para poder mostrar las páginas correspondientes.
 
 Usaremos UseContext y la api use de React ya que es la recomendada en la versión 19 de React.
+
+
+## Temas putuales
+
+- Hook useContext
+- Nueva API - use
+- Persistencia de sesiones de usuarios
+- Rutas de la aplicación
+- Rutas públicas y privadas
+- Diseño condicional
