@@ -25,6 +25,7 @@ React: De cero a experto - Edición 2025
 - Tailwind
 - Shadcn/ui
 - zod (validador de esquemas)
+- React Router
 
 ## Instalaciones recomendadas
 
@@ -61,3 +62,4 @@ React: De cero a experto - Edición 2025
 - [Sección 9: Profundizando Hooks y React](./seccion_09/index.md)
 - [Sección 10: Profundizando Hooks - useReducer](./seccion_10/index.md)
 - [Sección 11: Memorización y optimizaciones](./seccion_11/index.md)
+- [Sección 12: Use Context](./seccion_12/index.md)
