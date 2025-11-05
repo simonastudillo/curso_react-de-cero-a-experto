@@ -3,8 +3,9 @@ import { createRoot } from 'react-dom/client'
 // import { Toaster } from 'sonner'
 // import { HooksApp } from './HooksApp'
 import './index.css';
-import { ClientInformation } from './08-use-suspense/ClientInformation';
-import { getUserAction } from './08-use-suspense/api/get-user.actin';
+import { ProfessionalAPP } from './09-useContext/ProfessionalAPP';
+// import { ClientInformation } from './08-use-suspense/ClientInformation';
+// import { getUserAction } from './08-use-suspense/api/get-user.actin';
 // import { InstagromApp } from './07-useOptimistic/InstagromApp';
 // import { MemoCounter } from './06-memos/MemoCounter';
 // import { MemoHook } from './06-memos/MemoHook';
@@ -35,7 +36,8 @@ createRoot(document.getElementById('root')!).render(
             <h1>Cargando....</h1>
          </div>
       )}>
-         <ClientInformation getUser={getUserAction(100)} />
+         {/* <ClientInformation getUser={getUserAction(100)} /> */}
+         <ProfessionalAPP />
       </Suspense>
    </StrictMode>,
 )
