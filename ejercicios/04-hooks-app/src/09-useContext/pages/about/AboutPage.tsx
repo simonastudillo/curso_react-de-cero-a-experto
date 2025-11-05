@@ -1,18 +1,34 @@
+import { UserContext } from "@/09-useContext/context/UserContextProvider"
+import { Button } from "@/components/ui/button"
+import { use } from "react"
 import { Link } from "react-router"
 
 export const AboutPage = () => {
+
+   const { isAuthenticaded, logout } = use(UserContext)
+
    return (
       <div className="flex flex-col items-center justify-center min-h-screen">
          <h1 className="text-4xl font-bold">Página sobre mí</h1>
          <hr />
          <div className="flex flex-col gap-2">
-            <Link
-               to="/profile"
-               className="hover:text-blue-500 underline text-2xl"
-            >Perfil</Link>
-            <Link
-               to="/login"
-               className="hover:text-blue-500 underline text-2xl">Iniciar sesión</Link>
+            {
+               isAuthenticaded ? (
+                  <>
+                     <Link
+                        to="/profile"
+                        className="hover:text-blue-500 underline text-2xl"
+                     >Perfil</Link>
+                     <Button variant='destructive' className="mt-4" onClick={logout}>
+                        Salir
+                     </Button>
+                  </>
+               ) : (
+                  <Link
+                     to="/login"
+                     className="hover:text-blue-500 underline text-2xl">Iniciar sesión</Link>
+               )
+            }
          </div>
       </div>
    )
