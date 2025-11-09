@@ -63,3 +63,4 @@ React: De cero a experto - Edición 2025
 - [Sección 10: Profundizando Hooks - useReducer](./seccion_10/index.md)
 - [Sección 11: Memorización y optimizaciones](./seccion_11/index.md)
 - [Sección 12: Use Context](./seccion_12/index.md)
+- [Sección 13: Single Page Application - SPA](./seccion_13/index.md)
