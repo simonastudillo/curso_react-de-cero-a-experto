@@ -1,16 +1,21 @@
 import {
-   Heart,
    ChevronLeft,
    ChevronRight,
    MoreHorizontal,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { CustomJumbotron } from "@/components/custom/CustomJumbotron"
 import { HeroStats } from "@/heroes/components/HeroStats"
 import { HeroGrid } from "@/heroes/components/HeroGrid"
+import { useState } from "react"
+
+type tabType = "all" | "favorites" | "heroes" | "villains";
 
 export const HomePage = () => {
+
+   const [activeTab, setActiveTab] = useState<tabType>("all");
+
    return (
       <>
          <CustomJumbotron
@@ -21,20 +26,49 @@ export const HomePage = () => {
          <HeroStats />
 
          {/* Tabs */}
-         <Tabs value="all" className="mb-8">
+         <Tabs value={activeTab} className="mb-8">
             <TabsList className="grid w-full grid-cols-4">
-               <TabsTrigger value="all">All Characters (16)</TabsTrigger>
-               <TabsTrigger value="favorites" className="flex items-center gap-2">
-                  <Heart className="h-4 w-4" />
+               <TabsTrigger value="all"
+                  onClick={() => setActiveTab("all")}
+               >
+                  All Characters (16)
+               </TabsTrigger>
+               <TabsTrigger value="favorites" className="flex items-center gap-2"
+                  onClick={() => setActiveTab("favorites")}
+               >
                   Favorites (3)
                </TabsTrigger>
-               <TabsTrigger value="heroes">Heroes (12)</TabsTrigger>
-               <TabsTrigger value="villains">Villains (2)</TabsTrigger>
+               <TabsTrigger value="heroes" className="flex items-center gap-2"
+                  onClick={() => setActiveTab("heroes")}
+               >
+                  Heroes (12)
+               </TabsTrigger>
+               <TabsTrigger value="villains" className="flex items-center gap-2"
+                  onClick={() => setActiveTab("villains")}
+               >
+                  Villains (2)
+               </TabsTrigger>
             </TabsList>
+
+            <TabsContent value="all">
+               <h1>Todos los personajes</h1>
+               {/* Mostrar todos los personajes */}
+               <HeroGrid />
+            </TabsContent>
+            <TabsContent value="favorites">
+               <h1>Favoritos</h1>
+               <HeroGrid />
+            </TabsContent>
+            <TabsContent value="heroes">
+               <h1>Heroes</h1>
+               <HeroGrid />
+            </TabsContent>
+            <TabsContent value="villains">
+               <h1>Villains</h1>
+               <HeroGrid />
+            </TabsContent>
          </Tabs>
 
-         {/* Character Grid */}
-         <HeroGrid />
 
          {/* Pagination */}
          <div className="flex items-center justify-center space-x-2">
