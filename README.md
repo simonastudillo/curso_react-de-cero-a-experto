@@ -26,6 +26,7 @@ React: De cero a experto - Edición 2025
 - Shadcn/ui
 - zod (validador de esquemas)
 - React Router
+- Tanstack Query
 
 ## Instalaciones recomendadas
 
@@ -64,3 +65,4 @@ React: De cero a experto - Edición 2025
 - [Sección 11: Memorización y optimizaciones](./seccion_11/index.md)
 - [Sección 12: Use Context](./seccion_12/index.md)
 - [Sección 13: Single Page Application - SPA](./seccion_13/index.md)
+- [Sección 14: Funcionalidad, caché y optimizaciones](./seccion_14/index.md)
