@@ -4,6 +4,7 @@ import { HeroStats } from "@/heroes/components/HeroStats"
 import { HeroGrid } from "@/heroes/components/HeroGrid"
 import { useState } from "react"
 import { CustomPagination } from "@/components/custom/CustomPagination"
+import { CustomBreadcrumbs } from "@/components/custom/CustomBreadcrumbs"
 
 type tabType = "all" | "favorites" | "heroes" | "villains";
 
@@ -17,6 +18,7 @@ export const HomePage = () => {
             title="Universo de SuperHéroes"
             subtitle="Descubre, explora y gestiona tus superhéroes y villanos favoritos"
          />
+         <CustomBreadcrumbs currentPage="Home" />
          {/* Stats Dashboard */}
          <HeroStats />
 
