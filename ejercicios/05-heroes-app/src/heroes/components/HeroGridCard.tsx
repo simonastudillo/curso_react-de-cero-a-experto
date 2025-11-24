@@ -11,19 +11,28 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import type { Hero } from "../types/hero.interface"
+import { useNavigate } from "react-router"
 
 interface HeroGridCardProps {
    hero: Hero;
 }
 
 export const HeroGridCard = ({ hero }: HeroGridCardProps) => {
+
+   const navigate = useNavigate();
+
+   const handleClick = () => {
+      navigate(`/heroes/${hero.slug}`);
+   }
+
    return (
       <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50">
-         <div className="relative h-64 overflow-hidden">
+         <div className="relative h-64">
             <img
                src={hero.image}
                alt={hero.name}
-               className="object-cover transition-all duration-500 group-hover:scale-110"
+               onClick={handleClick}
+               className="object-cover transition-all duration-500 group-hover:scale-110 absolute top-[-30px] w-full h-[410px]"
             />
 
             {/* Status indicator */}
@@ -58,7 +67,7 @@ export const HeroGridCard = ({ hero }: HeroGridCardProps) => {
             </Button>
          </div>
 
-         <CardHeader className="pb-3">
+         <CardHeader className="py-3 z-10 bg-gray-100/50 backdrop-blur-sm relative top-1 group-hover:top-[-10px] transition-all duration-300">
             <div className="flex justify-between items-start">
                <div className="space-y-1">
                   <h3 className="font-bold text-lg leading-tight">{hero.alias}</h3>
