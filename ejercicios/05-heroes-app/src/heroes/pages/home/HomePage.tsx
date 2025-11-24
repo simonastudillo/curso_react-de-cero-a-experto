@@ -2,26 +2,39 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { CustomJumbotron } from "@/components/custom/CustomJumbotron"
 import { HeroStats } from "@/heroes/components/HeroStats"
 import { HeroGrid } from "@/heroes/components/HeroGrid"
-import { useState } from "react"
+import { useMemo } from "react"
 import { CustomPagination } from "@/components/custom/CustomPagination"
 import { CustomBreadcrumbs } from "@/components/custom/CustomBreadcrumbs"
 import { getHeroesByPageAction } from "@/heroes/actions/get-heroes-by-page.action"
-import { useQuery } from "@tanstack/react-query"
-import { heroes } from '../../../../../01-reforzamiento/src/data/heroes.data';
+import { useQuery } from "@tanstack/react-query";
+import { useSearchParams } from "react-router"
 
 type tabType = "all" | "favorites" | "heroes" | "villains";
 
 export const HomePage = () => {
 
-   const [activeTab, setActiveTab] = useState<tabType>("all");
+   const [searchParams, setSearchParams] = useSearchParams();
 
-   const { data: heroesResponse, isLoading } = useQuery({
+   const activeTab = searchParams.get("tab") as tabType ?? "all";
+   const selectedTab = useMemo(() => {
+      const validTabs: tabType[] = ["all", "favorites", "heroes", "villains"];
+      return validTabs.includes(activeTab) ? activeTab : "all";
+   }, [activeTab]);
+
+   const setActiveTab = (tab: tabType) => {
+      setSearchParams((prev) => {
+         prev.set("tab", tab);
+         return prev;
+      });
+   }
+
+   const { data: heroesResponse } = useQuery({
       queryKey: ['heroes'],
       queryFn: () => getHeroesByPageAction(),
       staleTime: 1000 * 60 * 5, // 5 minutes
    })
 
-   const { heroes = [], total, pages = 1 } = heroesResponse || {};
+   const { heroes = [], pages = 1 } = heroesResponse || {};
 
    return (
       <>
@@ -34,7 +47,7 @@ export const HomePage = () => {
          <HeroStats />
 
          {/* Tabs */}
-         <Tabs value={activeTab} className="mb-8">
+         <Tabs value={selectedTab} className="mb-8">
             <TabsList className="grid w-full grid-cols-4">
                <TabsTrigger value="all"
                   onClick={() => setActiveTab("all")}
