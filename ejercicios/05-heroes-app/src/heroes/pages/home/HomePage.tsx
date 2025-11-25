@@ -8,6 +8,7 @@ import { CustomBreadcrumbs } from "@/components/custom/CustomBreadcrumbs"
 import { getHeroesByPageAction } from "@/heroes/actions/get-heroes-by-page.action"
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router"
+import { getSummaryAction } from "@/heroes/actions/get-summary.action"
 
 type tabType = "all" | "favorites" | "heroes" | "villains";
 
@@ -38,6 +39,13 @@ export const HomePage = () => {
 
    const { heroes = [], pages = 1 } = heroesResponse || {};
 
+   const { data: summaryInformation } = useQuery({
+      queryKey: ['summary-information'],
+      queryFn: () => getSummaryAction(),
+      staleTime: 1000 * 60 * 5, // 5 minutes
+   })
+   const { totalHeroes, heroCount, villainCount } = summaryInformation || {};
+
    return (
       <>
          <CustomJumbotron
@@ -54,7 +62,7 @@ export const HomePage = () => {
                <TabsTrigger value="all"
                   onClick={() => setActiveTab("all")}
                >
-                  All Characters (16)
+                  All Characters ({totalHeroes})
                </TabsTrigger>
                <TabsTrigger value="favorites" className="flex items-center gap-2"
                   onClick={() => setActiveTab("favorites")}
@@ -64,12 +72,12 @@ export const HomePage = () => {
                <TabsTrigger value="heroes" className="flex items-center gap-2"
                   onClick={() => setActiveTab("heroes")}
                >
-                  Heroes (12)
+                  Heroes ({heroCount})
                </TabsTrigger>
                <TabsTrigger value="villains" className="flex items-center gap-2"
                   onClick={() => setActiveTab("villains")}
                >
-                  Villains (2)
+                  Villains ({villainCount})
                </TabsTrigger>
             </TabsList>
 
