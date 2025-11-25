@@ -31,7 +31,7 @@ export const HomePage = () => {
    }
 
    const { data: heroesResponse } = useQuery({
-      queryKey: ['heroes'],
+      queryKey: ['heroes', { page, limit }],
       queryFn: () => getHeroesByPageAction(+page, +limit),
       staleTime: 1000 * 60 * 5, // 5 minutes
    })
