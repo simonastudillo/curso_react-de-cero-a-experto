@@ -5,10 +5,9 @@ import { HeroGrid } from "@/heroes/components/HeroGrid"
 import { useMemo } from "react"
 import { CustomPagination } from "@/components/custom/CustomPagination"
 import { CustomBreadcrumbs } from "@/components/custom/CustomBreadcrumbs"
-import { getHeroesByPageAction } from "@/heroes/actions/get-heroes-by-page.action"
-import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router"
-import { getSummaryAction } from "@/heroes/actions/get-summary.action"
+import { useHeroSummary } from "@/heroes/hooks/useHeroSummary"
+import { usePaginatedHero } from "@/heroes/hooks/usePaginatedHero"
 
 type tabType = "all" | "favorites" | "heroes" | "villains";
 
@@ -31,19 +30,11 @@ export const HomePage = () => {
       });
    }
 
-   const { data: heroesResponse } = useQuery({
-      queryKey: ['heroes', { page, limit }],
-      queryFn: () => getHeroesByPageAction(+page, +limit),
-      staleTime: 1000 * 60 * 5, // 5 minutes
-   })
+   const { data: heroesResponse } = usePaginatedHero({ page: Number(page), limit: Number(limit) });
 
    const { heroes = [], pages = 1 } = heroesResponse || {};
 
-   const { data: summaryInformation } = useQuery({
-      queryKey: ['summary-information'],
-      queryFn: () => getSummaryAction(),
-      staleTime: 1000 * 60 * 5, // 5 minutes
-   })
+   const { data: summaryInformation } = useHeroSummary();
    const { totalHeroes, heroCount, villainCount } = summaryInformation || {};
 
    return (
