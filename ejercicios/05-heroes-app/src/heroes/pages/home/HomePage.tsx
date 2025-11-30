@@ -18,19 +18,23 @@ export const HomePage = () => {
    const activeTab = searchParams.get("tab") as tabType ?? "all";
    const page = searchParams.get("page") ?? "1";
    const limit = searchParams.get("limit") ?? "6";
+   const category = searchParams.get("category") ?? "all";
+
    const selectedTab = useMemo(() => {
       const validTabs: tabType[] = ["all", "favorites", "heroes", "villains"];
       return validTabs.includes(activeTab) ? activeTab : "all";
    }, [activeTab]);
 
-   const setActiveTab = (tab: tabType) => {
+   const setActiveTab = (tab: tabType, category: string) => {
       setSearchParams((prev) => {
          prev.set("tab", tab);
+         prev.set("category", category);
+         prev.set("page", "1");
          return prev;
       });
    }
 
-   const { data: heroesResponse } = usePaginatedHero({ page: Number(page), limit: Number(limit) });
+   const { data: heroesResponse } = usePaginatedHero({ page: Number(page), limit: Number(limit), category: category });
 
    const { heroes = [], pages = 1 } = heroesResponse || {};
 
@@ -51,22 +55,22 @@ export const HomePage = () => {
          <Tabs value={selectedTab} className="mb-8">
             <TabsList className="grid w-full grid-cols-4">
                <TabsTrigger value="all"
-                  onClick={() => setActiveTab("all")}
+                  onClick={() => setActiveTab("all", "all")}
                >
                   All Characters ({totalHeroes})
                </TabsTrigger>
                <TabsTrigger value="favorites" className="flex items-center gap-2"
-                  onClick={() => setActiveTab("favorites")}
+                  onClick={() => setActiveTab("favorites", "all")}
                >
                   Favorites (3)
                </TabsTrigger>
                <TabsTrigger value="heroes" className="flex items-center gap-2"
-                  onClick={() => setActiveTab("heroes")}
+                  onClick={() => setActiveTab("heroes", "hero")}
                >
                   Heroes ({heroCount})
                </TabsTrigger>
                <TabsTrigger value="villains" className="flex items-center gap-2"
-                  onClick={() => setActiveTab("villains")}
+                  onClick={() => setActiveTab("villains", "villain")}
                >
                   Villains ({villainCount})
                </TabsTrigger>
