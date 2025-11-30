@@ -15,9 +15,11 @@ import { useNavigate } from "react-router"
 
 interface HeroGridCardProps {
    hero: Hero;
+   asChild?: boolean;
+   children: React.ReactNode;
 }
 
-export const HeroGridCard = ({ hero }: HeroGridCardProps) => {
+export const HeroGridCard = ({ hero, asChild, children }: HeroGridCardProps) => {
 
    const navigate = useNavigate();
 
