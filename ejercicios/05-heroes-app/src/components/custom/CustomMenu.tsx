@@ -10,7 +10,7 @@ export const CustomMenu = () => {
    const isActive = (path: string): boolean => (pathname === path);
 
    return (
-      <NavigationMenu>
+      <NavigationMenu className="py-5">
          <NavigationMenuList>
 
             <NavigationMenuItem>

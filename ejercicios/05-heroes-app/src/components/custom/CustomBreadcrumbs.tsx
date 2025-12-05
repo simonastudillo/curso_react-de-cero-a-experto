@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "../ui/breadcrumb"
 import { SlashIcon } from "lucide-react"
+import { Fragment } from "react/jsx-runtime";
 
 export interface BreadcrumbItem {
    label: string;
@@ -18,21 +19,21 @@ export const CustomBreadcrumbs = ({ items, currentPage }: CustomBreadcrumbsProps
          <BreadcrumbList>
             {
                items?.map((item, index) => (
-                  <>
+                  <Fragment key={index + '-frag'}>
                      <BreadcrumbItem key={index}>
-                        <BreadcrumbLink asChild>
+                        <BreadcrumbLink asChild key={index + '-link'}>
                            <Link to={item.url}>{item.label}</Link>
                         </BreadcrumbLink>
                      </BreadcrumbItem>
-                     <BreadcrumbSeparator>
+                     <BreadcrumbSeparator key={index + '-sep'}>
                         <SlashIcon />
                      </BreadcrumbSeparator>
-                  </>
+                  </Fragment>
 
                ))
             }
 
-            <BreadcrumbItem>
+            <BreadcrumbItem key="current-page">
                <BreadcrumbPage>{currentPage}</BreadcrumbPage>
             </BreadcrumbItem>
          </BreadcrumbList>
