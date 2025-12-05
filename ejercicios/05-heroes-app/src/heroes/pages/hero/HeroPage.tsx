@@ -4,15 +4,19 @@ import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useHero } from "@/heroes/hooks/useHero"
 import { Shield, Zap, Brain, Gauge, Users, Star, Award } from "lucide-react"
-import { useParams } from "react-router"
+import { Navigate, useParams } from "react-router"
 
 export const HeroPage = () => {
 
    const { idSlug } = useParams();
    if (!idSlug) return <div>No se encontró el superhéroe.</div>;
 
-   const { data: superheroData } = useHero(idSlug);
+   const { data: superheroData, isError } = useHero(idSlug);
    if (!superheroData) return <div>No se encontró el superhéroe.</div>;
+
+   if (isError) {
+      return <Navigate to="/" />;
+   }
 
    const totalPower =
       superheroData.strength + superheroData?.intelligence + superheroData?.speed + superheroData?.durability

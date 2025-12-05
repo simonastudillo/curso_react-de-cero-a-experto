@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { getHero } from "../actions/get-hero";
+import { getHeroAction } from "../actions/get-hero.action";
 
 export const useHero = (idSlug: string) => {
 
    return useQuery({
       queryKey: ['hero-information', idSlug],
-      queryFn: () => getHero(idSlug),
-      staleTime: 1000 * 60 * 5, // 5 minutes
+      queryFn: () => getHeroAction(idSlug),
+      staleTime: 1000 * 60 * 5, // 5 minutes,
+      retry: false,
    });
 }
