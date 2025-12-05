@@ -66,3 +66,4 @@ React: De cero a experto - Edición 2025
 - [Sección 12: Use Context](./seccion_12/index.md)
 - [Sección 13: Single Page Application - SPA](./seccion_13/index.md)
 - [Sección 14: Funcionalidad, caché y optimizaciones](./seccion_14/index.md)
+- [Sección 15: Context API - Búsquedas y favoritos](./seccion_15/index.md)

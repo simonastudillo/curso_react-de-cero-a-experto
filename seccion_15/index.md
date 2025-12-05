@@ -1,0 +1,1 @@
+# Sección 15: Context API - Búsquedas y favoritos
