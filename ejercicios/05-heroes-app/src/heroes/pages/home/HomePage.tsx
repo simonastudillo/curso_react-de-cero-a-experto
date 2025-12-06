@@ -2,16 +2,19 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { CustomJumbotron } from "@/components/custom/CustomJumbotron"
 import { HeroStats } from "@/heroes/components/HeroStats"
 import { HeroGrid } from "@/heroes/components/HeroGrid"
-import { useMemo } from "react"
+import { use, useMemo } from "react"
 import { CustomPagination } from "@/components/custom/CustomPagination"
 import { CustomBreadcrumbs } from "@/components/custom/CustomBreadcrumbs"
 import { useSearchParams } from "react-router"
 import { useHeroSummary } from "@/heroes/hooks/useHeroSummary"
 import { usePaginatedHero } from "@/heroes/hooks/usePaginatedHero"
+import { FavoriteHeroContext } from "@/heroes/context/FavoriteHeroContext"
 
 type tabType = "all" | "favorites" | "heroes" | "villains";
 
 export const HomePage = () => {
+
+   const { favoriteCount, favorites } = use(FavoriteHeroContext);
 
    const [searchParams, setSearchParams] = useSearchParams();
 
@@ -62,7 +65,7 @@ export const HomePage = () => {
                <TabsTrigger value="favorites" className="flex items-center gap-2"
                   onClick={() => setActiveTab("favorites", "all")}
                >
-                  Favorites (3)
+                  Favorites ({favoriteCount})
                </TabsTrigger>
                <TabsTrigger value="heroes" className="flex items-center gap-2"
                   onClick={() => setActiveTab("heroes", "hero")}
@@ -83,7 +86,7 @@ export const HomePage = () => {
             </TabsContent>
             <TabsContent value="favorites">
                <h1>Favoritos</h1>
-               <HeroGrid heroes={heroes} />
+               <HeroGrid heroes={favorites} />
             </TabsContent>
             <TabsContent value="heroes">
                <h1>Heroes</h1>
@@ -97,7 +100,11 @@ export const HomePage = () => {
 
 
          {/* Pagination */}
-         <CustomPagination totalPages={pages} />
+         {
+            selectedTab !== "favorites" && (
+               <CustomPagination totalPages={pages} />
+            )
+         }
       </>
    )
 }
