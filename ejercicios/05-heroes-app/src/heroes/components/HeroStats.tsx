@@ -8,9 +8,11 @@ import {
 } from "lucide-react"
 import { HeroStatCard } from './HeroStatCard'
 import { useHeroSummary } from '../hooks/useHeroSummary';
+import { FavoriteHeroContext } from '../context/FavoriteHeroContext';
+import { use } from 'react';
 
 export const HeroStats = () => {
-
+   const { favoriteCount } = use(FavoriteHeroContext);
    const { data: summaryInformation } = useHeroSummary();
    const { totalHeroes, heroCount, villainCount, smartestHero, strongestHero } = summaryInformation || {};
 
@@ -34,8 +36,8 @@ export const HeroStats = () => {
             </CardContent>
          </Card>
          <HeroStatCard title="Favorites" icon={<Heart className="h-4 w-4 text-muted-foreground" />}>
-            <div className="text-2xl font-bold text-red-600">3</div>
-            <p className="text-xs text-muted-foreground">18.8% of total</p>
+            <div className="text-2xl font-bold text-red-600">{favoriteCount}</div>
+            <p className="text-xs text-muted-foreground">{((favoriteCount / (totalHeroes || 1)) * 100).toFixed(2)}% of total</p>
          </HeroStatCard>
          <HeroStatCard title="Strongest" icon={<Zap className="h-4 w-4 text-muted-foreground" />} >
             <div className="text-lg font-bold">{strongestHero?.name}</div>
