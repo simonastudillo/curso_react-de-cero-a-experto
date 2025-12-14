@@ -5,7 +5,7 @@ import { searchHeroesAction, type OptionsSearchHeroes } from "../actions/search-
 export const useSearchHeroes = ({ name, team, category, universe, status, strength }: OptionsSearchHeroes) => {
 
    return useQuery({
-      queryKey: ['heroes', { name, team, category, universe, status, strength }],
+      queryKey: ['heroes', 'search', { name, team, category, universe, status, strength }],
       queryFn: () => searchHeroesAction({ name, team, category, universe, status, strength }),
       staleTime: 1000 * 60 * 5, // 5 minutes
    })

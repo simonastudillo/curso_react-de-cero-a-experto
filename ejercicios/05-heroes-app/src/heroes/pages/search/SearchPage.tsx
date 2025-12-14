@@ -10,7 +10,7 @@ export const SearchPage = () => {
    const breadcrumbItems: BreadcrumbItem[] = [
       { label: "Home", url: "/" }
    ];
-   const [searchParams, setSearchParams] = useSearchParams();
+   const [searchParams] = useSearchParams();
 
    const name = searchParams.get("name") || "";
    const team = searchParams.get("team") || "";

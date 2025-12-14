@@ -13,14 +13,20 @@ export interface OptionsSearchHeroes {
 }
 
 
-export const searchHeroesAction = async (options: OptionsSearchHeroes) => {
+export const searchHeroesAction = async (options: OptionsSearchHeroes = {}) => {
+
+   const { name, team, category, universe, status, strength } = options;
+
+   if (!name && !team && !category && !universe && !status && !strength) {
+      return [];
+   }
 
    const { data } = await heroApi.get<Hero[]>("/search", {
       params: options
    });
-   const heroes = data.map(hero => ({
+
+   return data.map(hero => ({
       ...hero,
       image: `${BASE_URL}/images/${hero.image}`,
    }));
-   return heroes;
 }
