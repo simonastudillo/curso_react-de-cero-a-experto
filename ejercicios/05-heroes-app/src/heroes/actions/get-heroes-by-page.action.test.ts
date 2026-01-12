@@ -2,7 +2,6 @@ import { beforeEach, describe, expect, test } from "vitest";
 import { getHeroesByPageAction } from "./get-heroes-by-page.action";
 import AxiosMockAdapter from 'axios-mock-adapter';
 import { heroApi } from "../api/hero.api";
-import { heroes } from '../../../../01-reforzamiento/src/data/heroes.data';
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -66,13 +65,56 @@ describe("getSummaryAction", () => {
          pages: 1,
          heroes: []
       };
+      const defaultParams = { category: 'all', limit: 6, offset: 0 };
+
       heroesApiMock.onGet('/').reply(200, responseObject);
       heroesApiMock.resetHistory();
       // Act
       const response = await getHeroesByPageAction(page);
       // Arrange
-      const request = heroesApiMock.history;
-      console.log(request);
+      const params = heroesApiMock.history.get[0].params;
+      expect(params).toStrictEqual(defaultParams);
+   });
+
+   test("Should return the correct heroes when page is a string number", async () => {
+      // Assert
+      const page = '5' as unknown as number;
+      const responseObject = {
+         total: 10,
+         pages: 1,
+         heroes: []
+      };
+      const defaultParams = { category: 'all', limit: 6, offset: 24 };
+
+      heroesApiMock.onGet('/').reply(200, responseObject);
+      heroesApiMock.resetHistory();
+      // Act
+      const response = await getHeroesByPageAction(page);
+      // Arrange
+      const params = heroesApiMock.history.get[0].params;
+      expect(params).toStrictEqual(defaultParams);
+   });
+
+   test("Should call the api with the correct params", async () => {
+      // Assert
+      const page = '5' as unknown as number;
+      const limit = 10;
+      const category = 'heroes';
+      const expectedOffset = (5 - 1) * limit;
+      const responseObject = {
+         total: 10,
+         pages: 1,
+         heroes: []
+      };
+      const defaultParams = { category: category, limit: limit, offset: expectedOffset };
+
+      heroesApiMock.onGet('/').reply(200, responseObject);
+      heroesApiMock.resetHistory();
+      // Act
+      const response = await getHeroesByPageAction(page, limit, category);
+      // Arrange
+      const params = heroesApiMock.history.get[0].params;
+      expect(params).toStrictEqual(defaultParams);
    });
 
 });
