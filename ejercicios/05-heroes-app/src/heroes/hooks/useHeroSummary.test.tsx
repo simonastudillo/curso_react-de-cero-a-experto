@@ -1,8 +1,10 @@
-import { describe, expect, test } from "vitest";
-import { renderHook } from '@testing-library/react';
+import { describe, expect, test, vi } from "vitest";
+import { renderHook, waitFor } from '@testing-library/react';
 import { useHeroSummary } from "./useHeroSummary";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { PropsWithChildren } from "react";
+import { getSummaryAction } from "../actions/get-summary.action";
+import type { SummaryInformationResponse } from "../types/get-summary.response";
 
 const tanStackCustomProvider = () => {
 
@@ -19,6 +21,12 @@ const tanStackCustomProvider = () => {
    );
 };
 
+vi.mock('../actions/get-summary.action', () => ({
+   getSummaryAction: vi.fn(),
+}));
+
+const mockGetSummaryAction = vi.mocked(getSummaryAction);
+
 describe('useHeroSummary', () => {
 
    test('should return the initial state (isLoading)', () => {
@@ -31,6 +39,36 @@ describe('useHeroSummary', () => {
       expect(result.current.isLoading).toBeTruthy();
       expect(result.current.data).toBeUndefined();
       expect(result.current.error).toBeNull();
+   });
+
+   test('Should return success state with data when API call is successful', async () => {
+      // Assert
+      const mockSummaryData = {
+         totalHeroes: 10,
+         strongestHero: {
+            id: '1',
+            name: 'Superman',
+         },
+         smartestHero: {
+            id: '2',
+            name: 'Batman',
+         },
+         heroCount: 18,
+         villainCount: 7
+      } as SummaryInformationResponse;
+      mockGetSummaryAction.mockResolvedValue(mockSummaryData);
+      const { result } = renderHook(() => useHeroSummary(), {
+         wrapper: tanStackCustomProvider()
+      });
+      // Act
+      // Arrange
+      await waitFor(() => {
+         expect(result.current.isSuccess).toBeTruthy();
+      });
+      expect(result.current.isLoading).toBeFalsy();
+      expect(result.current.error).toBeNull();
+      expect(result.current.data).toEqual(mockSummaryData);
+      expect(mockGetSummaryAction).toHaveBeenCalled();
    });
 
 });
