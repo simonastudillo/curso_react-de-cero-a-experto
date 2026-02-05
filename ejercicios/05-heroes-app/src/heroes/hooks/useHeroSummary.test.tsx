@@ -6,6 +6,7 @@ import type { PropsWithChildren } from "react";
 import { getSummaryAction } from "../actions/get-summary.action";
 import type { SummaryInformationResponse } from "../types/get-summary.response";
 
+
 const tanStackCustomProvider = () => {
 
    const queryClient = new QueryClient({

@@ -7,7 +7,7 @@
    "editor.bracketPairColorization.enabled": true,
    "editor.fontSize": 16,
    "editor.formatOnPaste": true,
-   "editor.formatOnSave": true,
+   "editor.formatOnSave": false,
    "editor.lineNumbers": "on",
    "editor.matchBrackets": "always",
    "editor.minimap.enabled": false,
