@@ -61,9 +61,11 @@ describe('usePaginatedHero', () => {
       mockGetHeroesByPageAction.mockResolvedValue(mockHeroData);
       const page = 1;
       const limit = 6;
+      const category = 'all';
       const { result } = renderHook(() => usePaginatedHero({
          page: page,
-         limit: limit
+         limit: limit,
+         category: category
       }), {
          wrapper: tanStackCustomProvider()
       });
@@ -73,7 +75,7 @@ describe('usePaginatedHero', () => {
          expect(result.current.isSuccess).toBeTruthy();
       });
       expect(result.current.status).toBe('success');
-      expect(mockGetHeroesByPageAction).toHaveBeenCalledWith(page, limit);
+      expect(mockGetHeroesByPageAction).toHaveBeenCalledWith(page, limit, category);
    });
 
    test('Should call getHeroesByPageAction with arguments', async () => {
