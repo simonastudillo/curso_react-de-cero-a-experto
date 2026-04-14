@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { describe, expect, test } from "vitest";
+import { beforeEach, describe, expect, test } from "vitest";
 import { FavoriteHeroContext, FavoriteHeroProvider } from "./FavoriteHeroContext";
 import { use } from "react";
 import type { Hero } from "../types/hero.interface";
@@ -48,6 +48,10 @@ const renderContextTest = () => {
 
 describe('FavoriteHeroContext', () => {
 
+   beforeEach(() => {
+      localStorage.clear();
+   });
+
    test('Should initialize with default values', async () => {
       // Assert
       renderContextTest();
@@ -70,7 +74,23 @@ describe('FavoriteHeroContext', () => {
       expect(screen.getByTestId('is-favorite').textContent).toBe('Yes');
       expect(screen.getByTestId('favorite-hero').textContent).toBe('Batman');
       expect(JSON.parse(localStorage.getItem('favoriteHeroes') || '[]')).toEqual([mockHero]);
+      expect(screen.getByTestId('favorite-count').textContent).toBe('1');
+   });
 
+
+   test('Should remove hero from favorites when toggleFavorite is called', async () => {
+      // Assert
+      localStorage.setItem('favoriteHeroes', JSON.stringify([mockHero]));
+      renderContextTest();
+      const button = screen.getByTestId('toggle-favorite');
+      // Act
+      fireEvent.click(button);
+      screen.debug();
+      // Arrange
+      expect(screen.getByTestId('is-favorite').textContent).toBe('No');
+      expect(JSON.parse(localStorage.getItem('favoriteHeroes') || '[]')).toEqual([]);
+      expect(screen.getByTestId('favorite-count').textContent).toBe('0');
+      expect(screen.queryByTestId('favorite-hero')).toBeNull();
    });
 
 });
