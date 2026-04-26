@@ -16,6 +16,10 @@ export const HeroStats = () => {
    const { data: summaryInformation } = useHeroSummary();
    const { totalHeroes, heroCount, villainCount, smartestHero, strongestHero } = summaryInformation || {};
 
+   if (!summaryInformation) {
+      return <div>Loading...</div>
+   }
+
    return (
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
          <Card>
