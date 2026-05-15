@@ -4,9 +4,36 @@ import { HeroStats } from "./HeroStats";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useHeroSummary } from '../hooks/useHeroSummary';
 import type { SummaryInformationResponse } from "../types/get-summary.response";
+import { FavoriteHeroProvider } from "../context/FavoriteHeroContext";
 
 vi.mock('../hooks/useHeroSummary');
 const mockUseHeroSummary = vi.mocked(useHeroSummary);
+
+const mockHero = {
+   "id": "1",
+   "name": "Clark Kent",
+   "slug": "clark-kent",
+   "alias": "Superman",
+   "powers": [
+      "Súper fuerza",
+      "Vuelo",
+      "Visión de calor",
+      "Visión de rayos X",
+      "Invulnerabilidad",
+      "Súper velocidad"
+   ],
+   "description": "El Último Hijo de Krypton, protector de la Tierra y símbolo de esperanza para toda la humanidad.",
+   "strength": 10,
+   "intelligence": 8,
+   "speed": 9,
+   "durability": 10,
+   "team": "Liga de la Justicia",
+   "image": "1.jpeg",
+   "firstAppearance": "1938",
+   "status": "Active",
+   "category": "Hero",
+   "universe": "DC"
+};
 
 const mockSummaryData: SummaryInformationResponse = {
    "totalHeroes": 25,
@@ -86,7 +113,9 @@ const renderHeroStats = (mockData?: Partial<SummaryInformationResponse>) => {
 
    return render(
       <QueryClientProvider client={queryClient}>
-         <HeroStats />
+         <FavoriteHeroProvider>
+            <HeroStats />
+         </FavoriteHeroProvider>
       </QueryClientProvider>
    );
 }
@@ -109,6 +138,18 @@ describe("HeroStats", () => {
       expect(screen.getByText('Total Characters')).toBeDefined();
       expect(screen.getByText('Total Characters')).toBeDefined();
 
+   });
+
+   test('Should change the percentage of favorites when the favorite count changes', () => {
+      localStorage.setItem('favoriteHeroes', JSON.stringify([mockHero])); 
+
+      renderHeroStats(mockSummaryData);
+
+      const favoritePercentage = screen.getByTestId('favorite-percentage');
+      const favoriteCount = screen.getByTestId('favorite-count');
+
+      expect(favoriteCount.innerHTML).toBe('1');
+      expect(favoritePercentage.innerHTML).toContain('4.00% of total');
    });
 
 });
