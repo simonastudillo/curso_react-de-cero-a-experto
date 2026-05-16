@@ -89,6 +89,7 @@ exports[`HomePage > Should render HomePage with default values 1`] = `
         type="button"
       >
         Favorites (
+        0
         )
       </button>
       <button
