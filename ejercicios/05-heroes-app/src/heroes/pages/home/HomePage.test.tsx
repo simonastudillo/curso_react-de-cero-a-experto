@@ -1,4 +1,3 @@
-import { Home } from "lucide-react";
 import { MemoryRouter } from "react-router";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 import { HomePage } from "./HomePage";

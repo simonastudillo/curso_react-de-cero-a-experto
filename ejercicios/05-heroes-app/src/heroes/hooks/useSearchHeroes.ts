@@ -4,6 +4,10 @@ import { searchHeroesAction, type OptionsSearchHeroes } from "../actions/search-
 
 export const useSearchHeroes = ({ name, team, category, universe, status, strength }: OptionsSearchHeroes) => {
 
+   if (!name && !team && !category && !universe && !status && !strength) {
+      return {data: undefined};
+   }
+
    return useQuery({
       queryKey: ['heroes', 'search', { name, team, category, universe, status, strength }],
       queryFn: () => searchHeroesAction({ name, team, category, universe, status, strength }),
