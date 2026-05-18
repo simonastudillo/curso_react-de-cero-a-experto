@@ -25,6 +25,10 @@ vi.mock('@/heroes/hooks/useSearchHeroes');
 
 const mockSearhHeroes = vi.mocked(useSearchHeroes);
 
+vi.mock('./ui/SearchControls', () => ({
+   SearchControls: () => <div data-testid="custom-search-controls">CustomSearchControls</div>
+}));
+
 vi.mock('@/components/custom/CustomJumbotron', () => ({
    CustomJumbotron: () => <div data-testid="custom-jumbotron">CustomJumbotron</div>
 }));
