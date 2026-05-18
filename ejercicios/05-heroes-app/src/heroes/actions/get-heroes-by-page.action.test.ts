@@ -70,7 +70,7 @@ describe("getSummaryAction", () => {
       heroesApiMock.onGet('/').reply(200, responseObject);
       heroesApiMock.resetHistory();
       // Act
-      const response = await getHeroesByPageAction(page);
+      await getHeroesByPageAction(page);
       // Arrange
       const params = heroesApiMock.history.get[0].params;
       expect(params).toStrictEqual(defaultParams);
@@ -89,7 +89,7 @@ describe("getSummaryAction", () => {
       heroesApiMock.onGet('/').reply(200, responseObject);
       heroesApiMock.resetHistory();
       // Act
-      const response = await getHeroesByPageAction(page);
+      await getHeroesByPageAction(page);
       // Arrange
       const params = heroesApiMock.history.get[0].params;
       expect(params).toStrictEqual(defaultParams);
@@ -111,7 +111,7 @@ describe("getSummaryAction", () => {
       heroesApiMock.onGet('/').reply(200, responseObject);
       heroesApiMock.resetHistory();
       // Act
-      const response = await getHeroesByPageAction(page, limit, category);
+      await getHeroesByPageAction(page, limit, category);
       // Arrange
       const params = heroesApiMock.history.get[0].params;
       expect(params).toStrictEqual(defaultParams);

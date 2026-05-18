@@ -21,7 +21,7 @@ interface HeroGridCardProps {
    children: React.ReactNode;
 }
 
-export const HeroGridCard = ({ hero, asChild, children }: HeroGridCardProps) => {
+export const HeroGridCard = ({ hero }: HeroGridCardProps) => {
 
    const { isFavorite, toggleFavorite } = use(FavoriteHeroContext);
 

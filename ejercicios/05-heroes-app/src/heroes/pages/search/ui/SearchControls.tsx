@@ -4,7 +4,6 @@ import { Slider } from "@/components/ui/slider"
 import { Search, Filter, SortAsc, Grid, Plus } from "lucide-react"
 import { useRef } from "react"
 import { useSearchParams } from "react-router"
-import { test } from 'vitest';
 import {
    Accordion,
    AccordionContent,
