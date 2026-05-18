@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
 import { SearchControls } from "./SearchControls";
 import { MemoryRouter } from "react-router";
@@ -33,6 +33,23 @@ describe("SearchControls", () => {
    test('Should render SearchControls with default values', () => {
       const { container } = renderWithRouter();
       expect(container).toMatchSnapshot();
+   });
+
+   test('Should set input value when search param name is set', () => {
+      renderWithRouter(['/?name=superman']);
+      const input = screen.getByPlaceholderText('Search heroes, villains, powers, teams...') as HTMLInputElement;
+
+      expect(input.value).toBe('superman');
+   });
+
+   test('Should change params when input value is changed and enter is pressed', () => {
+      renderWithRouter(['/?name=superman']);
+      const input = screen.getByPlaceholderText('Search heroes, villains, powers, teams...') as HTMLInputElement;
+      expect(input.value).toBe('superman');
+      fireEvent.change(input, { target: { value: 'batman' } });
+      fireEvent.keyDown(input, { key: 'Enter', code: 'Enter' });
+      expect(input.value).toBe('batman');
+
    });
 
 });
