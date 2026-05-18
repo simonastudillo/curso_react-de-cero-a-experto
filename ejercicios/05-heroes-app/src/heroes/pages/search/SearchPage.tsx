@@ -12,14 +12,16 @@ export const SearchPage = () => {
    ];
    const [searchParams] = useSearchParams();
 
-   const name = searchParams.get("name") || "";
-   const team = searchParams.get("team") || "";
-   const category = searchParams.get("category") || "";
-   const universe = searchParams.get("universe") || "";
-   const status = searchParams.get("status") || "";
-   const strength = searchParams.get("strength") || "";
+   const name = searchParams.get("name") || undefined;
+   const team = searchParams.get("team") || undefined;
+   const category = searchParams.get("category") || undefined;
+   const universe = searchParams.get("universe") || undefined;
+   const status = searchParams.get("status") || undefined;
+   const strength = searchParams.get("strength") || undefined;
 
-   const { data: heroesResponse = [] } = useSearchHeroes({ name, team, category, universe, status, strength });
+   const response = useSearchHeroes({ name, team, category, universe, status, strength });
+
+   const heroesResponse = (response) ? response.data || [] : [];
 
    return (
       <>
