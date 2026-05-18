@@ -52,4 +52,27 @@ describe("SearchControls", () => {
 
    });
 
+   test('Should change params strength when slider value is changed', () => {
+      renderWithRouter(['/?active-accordion=advance-filters&name=superman&strength=5']);
+      const slider = screen.getByRole('slider') as HTMLInputElement;
+      expect(slider.getAttribute('aria-valuenow')).toBe('5');
+
+      fireEvent.keyDown(slider, { key: 'ArrowRight', code: 'ArrowRight' });
+      expect(slider.getAttribute('aria-valuenow')).toBe('6');
+   });
+
+   test('Should accordion be open when active-accordion param is set', () => {
+      renderWithRouter(['/?active-accordion=advance-filters']);
+      const accordion = screen.getByTestId('accordion');
+      const accordionItem = accordion.querySelector('div');
+      expect(accordionItem?.getAttribute('data-state')).toBe('open');
+   });
+
+   test('Should accordion be open when active-accordion param is set', () => {
+      renderWithRouter(['/?name=superman']);
+      const accordion = screen.getByTestId('accordion');
+      const accordionItem = accordion.querySelector('div');
+      expect(accordionItem?.getAttribute('data-state')).toBe('closed');
+   });
+
 });
