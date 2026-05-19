@@ -1,5 +1,8 @@
+import { RouterProvider } from "react-router"
+import { appRouter } from "./app.router"
+
 export const TesloShopApp = () => {
    return (
-      <h1>TesloShopApp</h1>
+      <RouterProvider router={appRouter} />
    )
 }
