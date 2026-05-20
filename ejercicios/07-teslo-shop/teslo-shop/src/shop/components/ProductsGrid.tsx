@@ -20,7 +20,7 @@ export const ProductsGrid = ({ products }: ProductsGridProps) => {
 
    const handleViewModeChange = (mode: 'grid' | 'list') => {
       searchParams.set('viewMode', mode);
-      setSearchParams({ viewMode: mode });
+      setSearchParams(searchParams);
    }
 
    return (
