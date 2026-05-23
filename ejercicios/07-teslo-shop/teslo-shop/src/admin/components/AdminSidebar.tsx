@@ -23,6 +23,9 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({ isCollapsed, onToggl
    const { pathname } = useLocation();
 
    const isActiveRoute = (route: string) => {
+      if (pathname.includes(`/admin/products`) && route === '/admin/products') {
+         return true;
+      }
       return pathname === route;
    }
 
