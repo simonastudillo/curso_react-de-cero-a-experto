@@ -12,13 +12,26 @@ export const useProducts = () => {
    const page = searchParams.get('page') || 1;
    const offset = (Number(page) - 1) * Number(limit);
 
+   const price = searchParams.get('price') || 'any';
+   let minPrice = price.split('-')[0] || undefined;
+   let maxPrice = price.split('-')[1] || undefined;
+   if (minPrice == '200+') {
+      minPrice = '200';
+      maxPrice = undefined;
+   } else if (minPrice === 'any') {
+      minPrice = undefined;
+      maxPrice = undefined;
+   }
+
    return useQuery({
-      queryKey: ['products', { limit, offset, sizes, gender }],
+      queryKey: ['products', { limit, offset, sizes, gender, minPrice, maxPrice }],
       queryFn: () => getProductsAction({
          limit: isNaN(+limit) ? 9 : limit,
          offset: isNaN(offset) ? 0 : offset,
          sizes,
-         gender
+         gender,
+         minPrice,
+         maxPrice
       }),
       staleTime: 1000 * 60 * 5,
    })

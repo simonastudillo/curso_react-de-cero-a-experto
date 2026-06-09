@@ -22,7 +22,6 @@ export const FilterSidebar = () => {
    }
 
    const handlePriceChange = (price: string) => {
-      console.log("Selected price:", price);
       searchParams.set("price", price);
       searchParams.set("page", "1");
       setSearchParams(searchParams);
