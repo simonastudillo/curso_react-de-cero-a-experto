@@ -27,6 +27,7 @@ React: De cero a experto - Edición 2025
 - zod (validador de esquemas)
 - React Router
 - Tanstack Query
+- Zustand
 
 ## Instalaciones recomendadas
 
