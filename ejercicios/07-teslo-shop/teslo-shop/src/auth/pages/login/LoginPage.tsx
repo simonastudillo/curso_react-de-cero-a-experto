@@ -4,13 +4,24 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { CustomLogo } from "@/components/custom/CustomLogo"
 import { Link } from "react-router"
+import type { SubmitEventHandler } from "react";
 
 export const LoginPage = () => {
+
+
+   const handleSubmit: SubmitEventHandler<HTMLFormElement> = (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(e.target as HTMLFormElement);
+      const email = formData.get("email") as string;
+      const password = formData.get("password") as string;
+   };
+
    return (
       <div className="flex flex-col gap-6">
          <Card className="overflow-hidden p-0">
             <CardContent className="grid p-0 md:grid-cols-2">
-               <form className="p-6 md:p-8">
+               <form className="p-6 md:p-8" onSubmit={handleSubmit}>
                   <div className="flex flex-col gap-6">
                      <div className="flex flex-col items-center text-center">
                         <CustomLogo />
@@ -18,7 +29,7 @@ export const LoginPage = () => {
                      </div>
                      <div className="grid gap-2">
                         <Label htmlFor="email">Correo</Label>
-                        <Input id="email" type="email" placeholder="example@google.com" required />
+                        <Input id="email" name="email" type="email" placeholder="example@google.com" required />
                      </div>
                      <div className="grid gap-2">
                         <div className="flex items-center">
@@ -27,7 +38,7 @@ export const LoginPage = () => {
                               ¿Olvidaste tu contraseña?
                            </a>
                         </div>
-                        <Input id="password" type="password" required placeholder="Contraseña" />
+                        <Input id="password" name="password" type="password" required placeholder="Contraseña" />
                      </div>
                      <Button type="submit" className="w-full">
                         Iniciar sesión
