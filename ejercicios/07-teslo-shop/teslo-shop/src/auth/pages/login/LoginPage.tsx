@@ -7,10 +7,12 @@ import { Link, useNavigate } from "react-router"
 import { useState, type SubmitEventHandler } from "react";
 import { loginAction } from "@/auth/actions/login.action"
 import { toast } from "sonner"
+import { useAuthStore } from "@/auth/store/auth.store"
 
 export const LoginPage = () => {
 
    const navigate = useNavigate();
+   const { login } = useAuthStore();
    const [isPosting, setIsPosting] = useState(false);
 
    const handleSubmit: SubmitEventHandler<HTMLFormElement> = async (e) => {
@@ -21,15 +23,14 @@ export const LoginPage = () => {
       const email = formData.get("email") as string;
       const password = formData.get("password") as string;
 
-      try {
-         const data = await loginAction({ email, password });
-         localStorage.setItem("token", data.token);
+      const isValid = await login(email, password);
+      if (isValid) {
          navigate("/");
-      } catch (error) {
-         toast.error("Error al iniciar sesión. Por favor, verifica tus credenciales e intenta nuevamente.");
-      } finally {
-         setIsPosting(false);
+         return;
       }
+
+      toast.error("Error al iniciar sesión. Por favor, verifica tus credenciales e intenta nuevamente.");
+      setIsPosting(false);
    };
 
    return (
