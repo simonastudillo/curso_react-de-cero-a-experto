@@ -3,18 +3,33 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { CustomLogo } from "@/components/custom/CustomLogo"
-import { Link } from "react-router"
-import type { SubmitEventHandler } from "react";
+import { Link, useNavigate } from "react-router"
+import { useState, type SubmitEventHandler } from "react";
+import { loginAction } from "@/auth/actions/login.action"
+import { toast } from "sonner"
 
 export const LoginPage = () => {
 
+   const navigate = useNavigate();
+   const [isPosting, setIsPosting] = useState(false);
 
-   const handleSubmit: SubmitEventHandler<HTMLFormElement> = (e) => {
+   const handleSubmit: SubmitEventHandler<HTMLFormElement> = async (e) => {
       e.preventDefault();
+      setIsPosting(true);
 
       const formData = new FormData(e.target as HTMLFormElement);
       const email = formData.get("email") as string;
       const password = formData.get("password") as string;
+
+      try {
+         const data = await loginAction({ email, password });
+         localStorage.setItem("token", data.token);
+         navigate("/");
+      } catch (error) {
+         toast.error("Error al iniciar sesión. Por favor, verifica tus credenciales e intenta nuevamente.");
+      } finally {
+         setIsPosting(false);
+      }
    };
 
    return (
@@ -40,8 +55,8 @@ export const LoginPage = () => {
                         </div>
                         <Input id="password" name="password" type="password" required placeholder="Contraseña" />
                      </div>
-                     <Button type="submit" className="w-full">
-                        Iniciar sesión
+                     <Button type="submit" className="w-full" disabled={isPosting}>
+                        {isPosting ? "Iniciando sesión..." : "Iniciar sesión"}
                      </Button>
                      <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
                         <span className="relative z-10 bg-background px-2 text-muted-foreground">o continúa con</span>
