@@ -4,7 +4,11 @@ import { Input } from "@/components/ui/input";
 import { useRef } from "react";
 import { Link, useParams, useSearchParams } from "react-router";
 import { CustomLogo } from "@/components/custom/CustomLogo";
+import { useAuthStore } from "@/auth/store/auth.store";
+
 export const CustomHeader = () => {
+
+   const { user, logout } = useAuthStore();
 
    const [searchParams, setSearchParams] = useSearchParams();
    const { gender } = useParams();
@@ -64,11 +68,21 @@ export const CustomHeader = () => {
                         Admin
                      </Button>
                   </Link>
-                  <Link to="/auth/login">
-                     <Button variant="default" size="sm" className="md-2">
-                        Login
-                     </Button>
-                  </Link>
+
+                  {
+                     !user ? (
+                        <Link to="/auth/login">
+                           <Button variant="default" size="sm" className="md-2">
+                              Login
+                           </Button>
+                        </Link>
+                     ) : (
+                        <Button variant="outline" size="sm" className="md-2" onClick={logout}>
+                           Cerrar sesión
+                        </Button>
+                     )
+                  }
+
 
                </div>
             </div>
