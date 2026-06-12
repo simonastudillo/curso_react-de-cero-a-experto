@@ -1,6 +1,7 @@
 import type { User } from '@/interfaces/user.interface';
 import { create } from 'zustand';
 import { loginAction } from '../actions/login.action';
+import { checkAuthAction } from '../actions/check-auth.action';
 
 type AuthStatus = "authenticated" | "not-authenticated" | "checking";
 
@@ -11,7 +12,8 @@ type AuthState = {
    authStatus: AuthStatus,
 
    login: (email: string, password: string) => Promise<boolean>,
-   logout: () => void
+   logout: () => void,
+   checkAuthStatus: () => Promise<boolean>,
 }
 
 export const useAuthStore = create<AuthState>()((set) => ({
@@ -25,16 +27,28 @@ export const useAuthStore = create<AuthState>()((set) => ({
          const { token, user } = await loginAction({ email, password });
          localStorage.setItem("token", token);
          const initialsUser = user.fullName.split(' ').map(name => name[0]).join('');
-         set({ token: token, user: user, initialsUser: initialsUser });
+         set({ token: token, user: user, initialsUser: initialsUser, authStatus: "authenticated" });
          return true;
       } catch {
          localStorage.removeItem("token");
-         set({ token: null, user: null, initialsUser: null });
+         set({ token: null, user: null, initialsUser: null, authStatus: "not-authenticated" });
          return false;
       }
    },
    logout: () => {
-      set({ token: null, user: null, initialsUser: null });
+      set({ token: null, user: null, initialsUser: null, authStatus: "not-authenticated" });
       localStorage.removeItem("token");
+   },
+   checkAuthStatus: async () => {
+      try {
+         const { user, token } = await checkAuthAction();
+         const initialsUser = user.fullName.split(' ').map(name => name[0]).join('');
+         set({ token: token, user: user, initialsUser: initialsUser, authStatus: "authenticated" });
+         return true;
+      } catch {
+         localStorage.removeItem("token");
+         set({ token: null, user: null, initialsUser: null, authStatus: "not-authenticated" });
+         return false;
+      }
    }
 }))
