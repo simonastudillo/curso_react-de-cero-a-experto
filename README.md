@@ -28,6 +28,7 @@ React: De cero a experto - Edición 2025
 - React Router
 - Tanstack Query
 - Zustand
+- useForm
 
 ## Instalaciones recomendadas
 
