@@ -4,6 +4,7 @@ import type { Product } from "@/interfaces/product.interface";
 import { Plus, SaveAll, Tag, Upload, X } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router";
+import { useForm } from "react-hook-form";
 
 export interface ProductFormProps {
    title: string;
@@ -16,6 +17,10 @@ const availableSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 export const ProductForm = ({ title, subTitle, product }: ProductFormProps) => {
 
    const [dragActive, setDragActive] = useState(false);
+
+   const { register } = useForm({
+      defaultValues: product
+   });
 
    const addTag = () => {
       // if (newTag.trim() && !product.tags.includes(newTag.trim())) {
@@ -107,6 +112,7 @@ export const ProductForm = ({ title, subTitle, product }: ProductFormProps) => {
                               Título del producto
                            </label>
                            <input
+                              {...register('title')}
                               type="text"
                               className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                               placeholder="Título del producto"
@@ -119,6 +125,7 @@ export const ProductForm = ({ title, subTitle, product }: ProductFormProps) => {
                                  Precio ($)
                               </label>
                               <input
+                                 {...register('price')}
                                  type="number"
                                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                                  placeholder="Precio del producto"
@@ -130,6 +137,7 @@ export const ProductForm = ({ title, subTitle, product }: ProductFormProps) => {
                                  Stock del producto
                               </label>
                               <input
+                                 {...register('stock')}
                                  type="number"
                                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                                  placeholder="Stock del producto"
@@ -142,6 +150,7 @@ export const ProductForm = ({ title, subTitle, product }: ProductFormProps) => {
                               Slug del producto
                            </label>
                            <input
+                              {...register('slug')}
                               type="text"
                               className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                               placeholder="Slug del producto"
@@ -153,6 +162,7 @@ export const ProductForm = ({ title, subTitle, product }: ProductFormProps) => {
                               Género del producto
                            </label>
                            <select
+                              {...register('gender')}
                               className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                            >
                               <option value="men">Hombre</option>
@@ -167,6 +177,7 @@ export const ProductForm = ({ title, subTitle, product }: ProductFormProps) => {
                               Descripción del producto
                            </label>
                            <textarea
+                              {...register('description')}
                               rows={5}
                               className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
                               placeholder="Descripción del producto"
@@ -248,9 +259,9 @@ export const ProductForm = ({ title, subTitle, product }: ProductFormProps) => {
                         <div className="flex gap-2">
                            <input
                               type="text"
-                              value={newTag}
-                              onChange={(e) => setNewTag(e.target.value)}
-                              onKeyDown={(e) => e.key === 'Enter' && addTag()}
+                              // value={newTag}
+                              // onChange={(e) => setNewTag(e.target.value)}
+                              // onKeyDown={(e) => e.key === 'Enter' && addTag()}
                               placeholder="Añadir nueva etiqueta..."
                               className="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                            />

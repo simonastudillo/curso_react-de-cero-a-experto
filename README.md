@@ -28,7 +28,7 @@ React: De cero a experto - Edición 2025
 - React Router
 - Tanstack Query
 - Zustand
-- useForm
+- [useForm](https://react-hook-form.com/docs/useform)
 
 ## Instalaciones recomendadas
 
