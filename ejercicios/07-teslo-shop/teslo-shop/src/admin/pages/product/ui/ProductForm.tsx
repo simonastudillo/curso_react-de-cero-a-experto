@@ -11,11 +11,13 @@ export interface ProductFormProps {
    title: string;
    subTitle: string;
    product: Product;
+
+   onSubmit: (productLike: Partial<Product>) => Promise<void>;
 }
 
 const availableSizes: Size[] = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
-export const ProductForm = ({ title, subTitle, product }: ProductFormProps) => {
+export const ProductForm = ({ title, subTitle, product, onSubmit }: ProductFormProps) => {
 
    const [dragActive, setDragActive] = useState(false);
    const tagInput = useRef<HTMLInputElement>(null);
@@ -79,10 +81,6 @@ export const ProductForm = ({ title, subTitle, product }: ProductFormProps) => {
       const files = e.target.files;
       console.log(files);
    };
-
-   const onSubmit = (productLike: Product) => {
-      console.log('onSubmit', productLike);
-   }
 
    return (
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -351,7 +349,7 @@ export const ProductForm = ({ title, subTitle, product }: ProductFormProps) => {
                               onKeyDown={(e) => {
                                  if (e.key === 'Enter' || e.key === ',' || e.key === ' ') {
                                     e.preventDefault();
-                                    addTag(e);
+                                    addTag();
                                  }
                               }}
                               ref={tagInput}

@@ -6,7 +6,7 @@ import { ProductForm } from './ui/ProductForm';
 export const AdminProductPage = () => {
    const { id } = useParams();
 
-   const { data: product, isLoading, isError } = useProduct(id!);
+   const { data: product, isLoading, isError, handleSubmit } = useProduct(id!);
 
    const productTitle = id === 'new' ? 'Nuevo producto' : 'Editar producto';
    const productSubtitle =
@@ -27,6 +27,6 @@ export const AdminProductPage = () => {
    }
 
    return (
-      <ProductForm title={productTitle} subTitle={productSubtitle} product={product} />
+      <ProductForm title={productTitle} subTitle={productSubtitle} product={product} onSubmit={handleSubmit} />
    )
 };
