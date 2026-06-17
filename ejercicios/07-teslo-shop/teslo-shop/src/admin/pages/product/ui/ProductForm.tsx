@@ -235,7 +235,7 @@ export const ProductForm = ({ title, subTitle, product, onSubmit, isPending }: P
                               <option value="men">Hombre</option>
                               <option value="women">Mujer</option>
                               <option value="unisex">Unisex</option>
-                              <option value="kids">Niño</option>
+                              <option value="kid">Niño</option>
                            </select>
                         </div>
 
