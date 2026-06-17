@@ -43,6 +43,8 @@ export const AdminProductPage = () => {
    }
 
    return (
-      <ProductForm title={productTitle} subTitle={productSubtitle} product={product} onSubmit={handleSubmit} />
+      <>
+         <ProductForm title={productTitle} subTitle={productSubtitle} product={product} onSubmit={handleSubmit} isPending={mutation.isPending} />
+      </>
    )
 };
