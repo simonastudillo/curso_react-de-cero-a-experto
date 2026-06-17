@@ -148,11 +148,25 @@ export const ProductForm = ({ title, subTitle, product }: ProductFormProps) => {
                                  Precio ($)
                               </label>
                               <input
-                                 {...register('price')}
+                                 {...register('price', { required: true, min: 1 })}
                                  type="number"
-                                 className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                 className={
+                                    cn(
+                                       "w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200",
+                                       {
+                                          'border-red-500 focus:ring-red-500': errors.price,
+                                       }
+                                    )
+                                 }
                                  placeholder="Precio del producto"
                               />
+                              {
+                                 errors.price && (
+                                    <p className="mt-1 text-sm text-red-600">
+                                       El precio es obligatorio y debe ser mayor a 0
+                                    </p>
+                                 )
+                              }
                            </div>
 
                            <div>
@@ -160,11 +174,25 @@ export const ProductForm = ({ title, subTitle, product }: ProductFormProps) => {
                                  Stock del producto
                               </label>
                               <input
-                                 {...register('stock')}
+                                 {...register('stock', { required: true, min: 0 })}
                                  type="number"
-                                 className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                 className={
+                                    cn(
+                                       "w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200",
+                                       {
+                                          'border-red-500 focus:ring-red-500': errors.stock,
+                                       }
+                                    )
+                                 }
                                  placeholder="Stock del producto"
                               />
+                              {
+                                 errors.stock && (
+                                    <p className="mt-1 text-sm text-red-600">
+                                       El stock es obligatorio y debe ser mayor o igual a 0
+                                    </p>
+                                 )
+                              }
                            </div>
                         </div>
 
@@ -173,11 +201,28 @@ export const ProductForm = ({ title, subTitle, product }: ProductFormProps) => {
                               Slug del producto
                            </label>
                            <input
-                              {...register('slug')}
+                              {...register('slug', {
+                                 required: true,
+                                 validate: (value) => !/\s/.test(value) || 'El Slug no puede contener espacios en blanco'
+                              })}
                               type="text"
-                              className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                              className={
+                                 cn(
+                                    "w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200",
+                                    {
+                                       'border-red-500 focus:ring-red-500': errors.slug,
+                                    }
+                                 )
+                              }
                               placeholder="Slug del producto"
                            />
+                           {
+                              errors.slug && (
+                                 <p className="mt-1 text-sm text-red-600">
+                                    {errors.slug.message || 'El slug es obligatorio'}
+                                 </p>
+                              )
+                           }
                         </div>
 
                         <div>
@@ -200,11 +245,25 @@ export const ProductForm = ({ title, subTitle, product }: ProductFormProps) => {
                               Descripción del producto
                            </label>
                            <textarea
-                              {...register('description')}
+                              {...register('description', { required: true })}
                               rows={5}
-                              className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
+                              className={
+                                 cn(
+                                    "w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none",
+                                    {
+                                       'border-red-500 focus:ring-red-500': errors.description,
+                                    }
+                                 )
+                              }
                               placeholder="Descripción del producto"
                            />
+                           {
+                              errors.description && (
+                                 <p className="mt-1 text-sm text-red-600">
+                                    La descripción es obligatoria
+                                 </p>
+                              )
+                           }
                         </div>
                      </div>
                   </div>
