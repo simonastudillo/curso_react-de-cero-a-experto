@@ -5,6 +5,7 @@ import { Plus, SaveAll, Tag, Upload, X } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router";
 import { useForm } from "react-hook-form";
+import { cn } from "@/lib/utils";
 
 export interface ProductFormProps {
    title: string;
@@ -18,9 +19,11 @@ export const ProductForm = ({ title, subTitle, product }: ProductFormProps) => {
 
    const [dragActive, setDragActive] = useState(false);
 
-   const { register } = useForm({
+   const { register, handleSubmit, formState: { errors } } = useForm({
       defaultValues: product
    });
+
+   console.log(errors);
 
    const addTag = () => {
       // if (newTag.trim() && !product.tags.includes(newTag.trim())) {
@@ -77,8 +80,12 @@ export const ProductForm = ({ title, subTitle, product }: ProductFormProps) => {
       console.log(files);
    };
 
+   const onSubmit = (productLike: Product) => {
+      console.log('onSubmit', productLike);
+   }
+
    return (
-      <>
+      <form onSubmit={handleSubmit(onSubmit)}>
          <div className="flex justify-between items-center">
             <AdminTitle title={title} subtitle={subTitle} />
             <div className="flex justify-end mb-10 gap-4">
@@ -89,7 +96,7 @@ export const ProductForm = ({ title, subTitle, product }: ProductFormProps) => {
                   </Link>
                </Button>
 
-               <Button>
+               <Button type="submit">
                   <SaveAll className="w-4 h-4" />
                   Guardar cambios
                </Button>
@@ -112,11 +119,27 @@ export const ProductForm = ({ title, subTitle, product }: ProductFormProps) => {
                               Título del producto
                            </label>
                            <input
-                              {...register('title')}
+                              {...register('title', {
+                                 required: true
+                              })}
                               type="text"
-                              className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                              className={
+                                 cn(
+                                    "w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200",
+                                    {
+                                       'border-red-500 focus:ring-red-500': errors.title,
+                                    }
+                                 )
+                              }
                               placeholder="Título del producto"
                            />
+                           {
+                              errors.title && (
+                                 <p className="mt-1 text-sm text-red-600">
+                                    El título es obligatorio
+                                 </p>
+                              )
+                           }
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -400,6 +423,6 @@ export const ProductForm = ({ title, subTitle, product }: ProductFormProps) => {
                </div>
             </div>
          </div>
-      </>
+      </form>
    );
 }
