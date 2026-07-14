@@ -25,3 +25,18 @@ Lo principal es recibir un archivo y enviarlo al backend, también se verá el d
 - Para finalizar haz click en "Deploy web service" y espera a que se despliegue el backend.
 >[!WARNING]
 > Recuerda cambiar la variable de entorno de baseUrl en el proyecto de frontend y del backend, para que apunten a la url del backend desplegado.
+
+## Desplegar aplicación de React
+- Para subir el frontend, podemos usar Netlify
+- Se recomienda crear un repositorio en GitHub y subir el proyecto de frontend.
+- Luego en Netlify, haz click en "New site from Git" y selecciona el repositorio que quieres desplegar.
+- Configura el nombre del proyecto, la rama a desplegar, revisa los comandos de build y la carpeta de publicación, sube las variables de entorno necesarias y haz click en "Deploy site"
+
+>[!WARNING]
+> Recuerda cambiar la variable de entorno de baseUrl en el proyecto de frontend, para que apunte a la url del backend desplegado.
+> Recuerda que la URL no debe terminar con una barra diagonal, de lo contrario no funcionará la carga de archivos.
+
+- Al cambiar rutas en el frontend desplegado y luego recargar la página, puede que aparezca un error 404, para solucionarlo, esto ocurre porque intenta buscar una carpeta con ese nombre.
+- Una forma rápida de solucionarlo es usar `#` en la configuración de rutas del frontend.
+- Cambia createBrowserRouter por createHashRouter en el archivo router.
+- Usando estas opciones, cada vez que se envíe un push a main o se haga un PR, se desplegará automáticamente la aplicación de React y el backend en sus respectivos servidores de producción.
