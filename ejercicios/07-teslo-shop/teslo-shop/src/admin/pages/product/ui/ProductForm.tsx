@@ -2,7 +2,7 @@ import { AdminTitle } from "@/admin/components/AdminTitle";
 import { Button } from "@/components/ui/button";
 import type { Product, Size } from "@/interfaces/product.interface";
 import { Plus, SaveAll, Tag, Upload, X } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { useForm } from "react-hook-form";
 import { cn } from "@/lib/utils";
@@ -34,6 +34,11 @@ export const ProductForm = ({ title, subTitle, product, onSubmit, isPending }: P
    const selectedSizes = watch('sizes');
    const selectedTags = watch('tags');
    const currentStock = watch('stock');
+   const [files, setFiles] = useState<File[]>([]);
+   console.log(files);
+   useEffect(() => {
+      setFiles([]);
+   }, [product]);
 
    const addTag = () => {
       const newTag = tagInput.current?.value.trim();
@@ -81,14 +86,17 @@ export const ProductForm = ({ title, subTitle, product, onSubmit, isPending }: P
       const files = e.dataTransfer.files;
       if (!files) return;
 
-      setValue('files', [...getValues('files') || [], ...Array.from(files)]);
+      setFiles(prev => [...prev, ...Array.from(files)]);
+      const currentFiles = getValues('files') || [];
+      setValue('files', [...currentFiles, ...Array.from(files)]);
    };
 
    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const files = e.target.files;
       if (!files) return;
-
-      setValue('files', [...getValues('files') || [], ...Array.from(files)]);
+      setFiles(prev => [...prev, ...Array.from(files)]);
+      const currentFiles = getValues('files') || [];
+      setValue('files', [...currentFiles, ...Array.from(files)]);
    };
 
    return (
@@ -443,13 +451,13 @@ export const ProductForm = ({ title, subTitle, product, onSubmit, isPending }: P
 
                      {/* Imagenes por cargar */}
                      <div className={cn("mt-6 space-y-3", {
-                        hidden: getValues('files')?.length === 0
+                        hidden: files?.length === 0
                      })}>
                         <h3 className="text-sm font-medium text-slate-700">
                            Imágenes por cargar
                         </h3>
                         <div className="grid grid-cols-2 gap-3">
-                           {getValues('files')?.map((file, index) => (
+                           {files?.map((file, index) => (
                               <img
                                  key={index}
                                  src={URL.createObjectURL(file)}
