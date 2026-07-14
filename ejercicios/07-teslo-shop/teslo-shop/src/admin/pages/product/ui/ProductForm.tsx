@@ -13,21 +13,23 @@ export interface ProductFormProps {
    product: Product;
    isPending: boolean;
 
-   onSubmit: (productLike: Partial<Product>) => Promise<void>;
+   onSubmit: (productLike: Partial<Product> & { files?: File[] }) => Promise<void>;
 }
 
 const availableSizes: Size[] = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+
+interface FormInputs extends Product {
+   files?: File[];
+}
 
 export const ProductForm = ({ title, subTitle, product, onSubmit, isPending }: ProductFormProps) => {
 
    const [dragActive, setDragActive] = useState(false);
    const tagInput = useRef<HTMLInputElement>(null);
 
-   const { register, handleSubmit, formState: { errors }, getValues, setValue, watch } = useForm({
+   const { register, handleSubmit, formState: { errors }, getValues, setValue, watch } = useForm<FormInputs>({
       defaultValues: product
    });
-
-   const [files, setFiles] = useState<File[]>([]);
 
    const selectedSizes = watch('sizes');
    const selectedTags = watch('tags');
@@ -79,14 +81,14 @@ export const ProductForm = ({ title, subTitle, product, onSubmit, isPending }: P
       const files = e.dataTransfer.files;
       if (!files) return;
 
-      setFiles(prev => [...prev, ...Array.from(files)]);
+      setValue('files', [...getValues('files') || [], ...Array.from(files)]);
    };
 
    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const files = e.target.files;
       if (!files) return;
 
-      setFiles(prev => [...prev, ...Array.from(files)]);
+      setValue('files', [...getValues('files') || [], ...Array.from(files)]);
    };
 
    return (
@@ -441,13 +443,13 @@ export const ProductForm = ({ title, subTitle, product, onSubmit, isPending }: P
 
                      {/* Imagenes por cargar */}
                      <div className={cn("mt-6 space-y-3", {
-                        hidden: files.length === 0
+                        hidden: getValues('files')?.length === 0
                      })}>
                         <h3 className="text-sm font-medium text-slate-700">
                            Imágenes por cargar
                         </h3>
                         <div className="grid grid-cols-2 gap-3">
-                           {files.map((file, index) => (
+                           {getValues('files')?.map((file, index) => (
                               <img
                                  key={index}
                                  src={URL.createObjectURL(file)}
