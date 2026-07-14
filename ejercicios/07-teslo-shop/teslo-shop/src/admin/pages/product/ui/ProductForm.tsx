@@ -27,6 +27,8 @@ export const ProductForm = ({ title, subTitle, product, onSubmit, isPending }: P
       defaultValues: product
    });
 
+   const [files, setFiles] = useState<File[]>([]);
+
    const selectedSizes = watch('sizes');
    const selectedTags = watch('tags');
    const currentStock = watch('stock');
@@ -75,12 +77,16 @@ export const ProductForm = ({ title, subTitle, product, onSubmit, isPending }: P
       e.stopPropagation();
       setDragActive(false);
       const files = e.dataTransfer.files;
-      console.log(files);
+      if (!files) return;
+
+      setFiles(prev => [...prev, ...Array.from(files)]);
    };
 
    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const files = e.target.files;
-      console.log(files);
+      if (!files) return;
+
+      setFiles(prev => [...prev, ...Array.from(files)]);
    };
 
    return (
@@ -432,6 +438,25 @@ export const ProductForm = ({ title, subTitle, product, onSubmit, isPending }: P
                            ))}
                         </div>
                      </div>
+
+                     {/* Imagenes por cargar */}
+                     <div className={cn("mt-6 space-y-3", {
+                        hidden: files.length === 0
+                     })}>
+                        <h3 className="text-sm font-medium text-slate-700">
+                           Imágenes por cargar
+                        </h3>
+                        <div className="grid grid-cols-2 gap-3">
+                           {files.map((file, index) => (
+                              <img
+                                 key={index}
+                                 src={URL.createObjectURL(file)}
+                                 alt="Product"
+                                 className="w-full h-full object-cover rounded-lg"
+                              />
+                           ))}
+                        </div>
+                     </div>
                   </div>
 
                   {/* Product Status */}
@@ -492,6 +517,6 @@ export const ProductForm = ({ title, subTitle, product, onSubmit, isPending }: P
                </div>
             </div>
          </div>
-      </form>
+      </form >
    );
 }
