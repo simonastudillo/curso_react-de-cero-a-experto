@@ -29,6 +29,7 @@ React: De cero a experto - Edición 2025
 - Tanstack Query
 - Zustand
 - [react-hook-form](https://react-hook-form.com/docs/useform)
+- [Neon](https://neon.tech/)
 
 ## Instalaciones recomendadas
 

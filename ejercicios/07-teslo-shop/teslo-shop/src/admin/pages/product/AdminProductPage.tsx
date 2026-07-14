@@ -11,7 +11,7 @@ export const AdminProductPage = () => {
 
    const { data: product, isLoading, isError, mutation } = useProduct(id!);
 
-   const handleSubmit = async (productLike: Partial<Product>) => {
+   const handleSubmit = async (productLike: Partial<Product> & { files?: File[] }) => {
       await mutation.mutateAsync(productLike, {
          onSuccess: (data: Product) => {
             toast.success('Producto guardado correctamente');
