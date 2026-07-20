@@ -1,0 +1,3 @@
+# Punto de control
+
+El curso actualizado al 2026 llega hasta esta sección, a partir de aquí es contenido legacy de versiones anteriores del curso y de Angular, donde además se trabaja con Javascript y no con TypeScript. Por lo tanto, no se crearán los proyectos de la sección 23 en adelante, solo se tomarán apuntes de los temas tratados en estas secciones, ya que no son relevantes para el curso actualizado.

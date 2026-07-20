@@ -77,3 +77,4 @@ React: De cero a experto - Edición 2025
 - [Sección 20: Auth](./seccion_20/index.md)
 - [Sección 21: Formularios y productos](./seccion_21/index.md)
 - [Sección 22: Carga de archivos](./seccion_22/index.md)
+- [Sección 23: Punto de control](./seccion_23/index.md)
