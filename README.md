@@ -30,6 +30,7 @@ React: De cero a experto - Edición 2025
 - Zustand
 - [react-hook-form](https://react-hook-form.com/docs/useform)
 - [Neon](https://neon.tech/)
+- Redux
 
 ## Instalaciones recomendadas
 
@@ -78,3 +79,4 @@ React: De cero a experto - Edición 2025
 - [Sección 21: Formularios y productos](./seccion_21/index.md)
 - [Sección 22: Carga de archivos](./seccion_22/index.md)
 - [Sección 23: Punto de control](./seccion_23/index.md)
+- [Sección 24: MERN Calendar - Estructura y diseño](./seccion_24/index.md)
