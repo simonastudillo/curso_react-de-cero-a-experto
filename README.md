@@ -80,3 +80,7 @@ React: De cero a experto - Edición 2025
 - [Sección 22: Carga de archivos](./seccion_22/index.md)
 - [Sección 23: Punto de control](./seccion_23/index.md)
 - [Sección 24: MERN Calendar - Estructura y diseño](./seccion_24/index.md)
+- [Sección 25: CalendarApp - Backend - Node, Express, Mongo](./seccion_25/index.md)
+
+>[!NOTE]
+> A partir de la sección 24, no se generarán proyectos, ya que son lecciones legacy usando Javascript y versiones de librerías antiguas.
