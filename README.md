@@ -84,6 +84,7 @@ React: De cero a experto - Edición 2025
 - [Sección 27: Sección 27: Despliegue del backend a la nube](./seccion_27/index.md)
 - [Sección 28: MERN - Calendario + Backend](./seccion_28/index.md)
 - [Sección 29: MERN CRUD - Eventos del calendario](./seccion_29/index.md)
+- [Sección 30: Fin del MERN - Desplegarlo a producción](./seccion_30/index.md)
 
 >[!INFO]
 > A partir de la sección 23, no se crearán los sistemas de front-end debido a que es material antiguo usando librerías y versiones de React que ya no se utilizan.
